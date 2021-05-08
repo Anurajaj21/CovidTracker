@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:gravity = "fill">
+            <gradient
+                android:startColor="@color/light_pink"
+                android:centerColor="@color/light_gray"
+                android:centerY="@android:integer/config_shortAnimTime"
+                android:endColor="@color/light_pink"
+                android:angle="0"/>
+            <corners
+                android:radius="10dp"/>
+        </shape>
+
+    </item>
+</layer-list>
