@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Fragments.IndiaFragment">
+    tools:context=".Fragments.DistrictFragment">
+
 
     <LinearLayout
         android:id="@+id/location"
@@ -14,14 +15,12 @@
         android:orientation="horizontal"
         android:layout_marginBottom="2dp"
         android:padding="4dp">
+
         <ImageView
-            android:id="@+id/in_flag"
-            android:layout_width="50dp"
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="2dp"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
             android:padding="8dp"
-            android:src="@drawable/india_flag"
-            android:layout_height="match_parent"/>
+            android:src="@drawable/left_arrow"/>
 
         <TextView
             android:id="@+id/in_name"
@@ -29,7 +28,7 @@
             android:layout_height="match_parent"
             android:fontFamily="@font/roboto"
             android:padding="2dp"
-            android:text="India"
+            android:text="District Name"
             android:gravity="center"
             android:textColor="@color/dark_green"
             android:textSize="20sp"
@@ -71,7 +70,7 @@
             android:background="@drawable/gradient2">
 
             <org.eazegraph.lib.charts.PieChart
-                android:id="@+id/india_piechart"
+                android:id="@+id/state_piechart"
                 android:layout_height="match_parent"
                 android:layout_width="0dp"
                 android:layout_weight="1"
@@ -205,7 +204,7 @@
                 android:orientation="vertical" >
 
                 <TextView
-                    android:id="@+id/in_active_cases"
+                    android:id="@+id/st_active_cases"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="325356"
@@ -216,7 +215,7 @@
                     android:fontFamily="@font/roboto"/>
 
                 <TextView
-                    android:id="@+id/in_delta_actcive"
+                    android:id="@+id/st_delta_actcive"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="+4678"
@@ -263,7 +262,7 @@
                 app:layout_constraintTop_toTopOf="parent" >
 
                 <TextView
-                    android:id="@+id/in_confirmed_cases"
+                    android:id="@+id/st_confirmed_cases"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="325356"
@@ -274,7 +273,7 @@
                     android:fontFamily="@font/roboto"/>
 
                 <TextView
-                    android:id="@+id/in_delta_confirmed"
+                    android:id="@+id/st_delta_confirmed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="+4678"
@@ -303,6 +302,7 @@
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:orientation="horizontal"
+        android:layout_marginBottom="2dp"
         android:weightSum="2">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
@@ -326,7 +326,7 @@
                 android:orientation="vertical" >
 
                 <TextView
-                    android:id="@+id/in_recovered_cases"
+                    android:id="@+id/st_recovered_cases"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="325356"
@@ -337,7 +337,7 @@
                     android:fontFamily="@font/roboto"/>
 
                 <TextView
-                    android:id="@+id/in_delta_recovered"
+                    android:id="@+id/st_delta_recovered"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="+4678"
@@ -382,7 +382,7 @@
                 app:layout_constraintTop_toTopOf="parent" >
 
                 <TextView
-                    android:id="@+id/in_death_cases"
+                    android:id="@+id/st_death_cases"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="325356"
@@ -393,7 +393,7 @@
                     android:fontFamily="@font/roboto"/>
 
                 <TextView
-                    android:id="@+id/in_delta_deaths"
+                    android:id="@+id/st_delta_deaths"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="+4678"
@@ -418,73 +418,25 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="10dp"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="45dp"
-            android:layout_height="wrap_content"
-            android:text="Note: "
-            android:textColor="@color/red"
-            android:fontFamily="@font/roboto"/>
-        <TextView
-            android:id="@+id/india_note"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="here is some important informaion."
-            android:fontFamily="@font/roboto"/>
-
-    </LinearLayout>
-
-        <SearchView
-            android:id="@+id/search_state"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:animationCache="true"
-            android:background="@drawable/gradient3"
-            android:iconifiedByDefault="false"
-            android:padding="2dp"
-            android:layout_margin="4dp"
-            android:queryBackground="@android:color/transparent"
-            android:searchIcon="@drawable/search_icon"
-            android:queryHint="Search State"/>
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="3"
-            android:background="@drawable/gradient5"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="2dp">
-
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:orientation="horizontal">
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="45dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:text="States"
-                android:paddingStart="10dp"
-                android:paddingTop="4dp"
-                android:paddingBottom="4dp"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:fontFamily="@font/roboto"
-                android:paddingLeft="10dp" />
+                android:text="Note: "
+                android:textColor="@color/red"
+                android:fontFamily="@font/roboto"/>
+            <TextView
+                android:id="@+id/state_note"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="here is some important informaion."
+                android:fontFamily="@font/roboto"/>
 
         </LinearLayout>
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/states_rv"
-            android:layout_width="match_parent"
-            android:layout_height="400dp"
-            android:nestedScrollingEnabled="true"
-            android:layout_marginTop="2dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="2dp"/>
 
     </LinearLayout>
     </androidx.core.widget.NestedScrollView>

@@ -8,6 +8,7 @@ import com.example.covidtracker.Fragments.IndiaFragment
 import com.example.covidtracker.Fragments.WorldFragment
 import com.example.covidtracker.R
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.each_state.view.*
 
 class MainActivity : AppCompatActivity() {
     val fragmentManager = supportFragmentManager
@@ -35,6 +36,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
 
     private fun changeFragment(dest : Fragment) {
         val fragmentTransition = fragmentManager.beginTransaction()

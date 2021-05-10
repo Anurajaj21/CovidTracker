@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Fragments.HomeFragment">
+    tools:context=".Fragments.StateFragment">
 
     <LinearLayout
         android:id="@+id/location"
@@ -14,33 +14,32 @@
         android:orientation="horizontal"
         android:layout_marginBottom="2dp"
         android:padding="4dp">
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:padding="8dp"
+            android:src="@drawable/left_arrow"/>
 
         <TextView
             android:id="@+id/in_name"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:fontFamily="@font/roboto"
-            android:layout_marginLeft="4dp"
             android:padding="2dp"
-            android:text="District Name"
+            android:text="State Name"
             android:gravity="center"
             android:textColor="@color/dark_green"
             android:textSize="20sp"
             android:textStyle="bold" />
 
     </LinearLayout>
-<!--    <androidx.appcompat.widget.Toolbar-->
-<!--        android:id="@+id/location"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:background="@drawable/gradient3"-->
-<!--        android:layout_marginBottom="2dp"-->
-<!--        app:title="District name"-->
-<!--        app:titleTextColor="@color/dark_green" />-->
+
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:descendantFocusability="blocksDescendants"
+        android:scrollbarSize="4dp"
         android:layout_below="@+id/location">
 
         <LinearLayout
@@ -48,133 +47,133 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/district_graph"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        app:cardBackgroundColor="@color/orange"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="4dp"
-        android:layout_below="@+id/location"
-        android:layout_marginTop="2dp"
-        android:layout_marginBottom="4dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="4dp">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:padding="4dp"
-            android:weightSum="2"
-            android:background="@drawable/gradient2">
-
-            <org.eazegraph.lib.charts.PieChart
-                android:id="@+id/state_piechart"
-                android:layout_height="match_parent"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                app:egDrawValueInPie="true"
-                app:egLegendHeight="0dp"
-                app:egInnerPaddingColor="@color/cardview_shadow_start_color"
-                app:egValueTextSize="0dp"
-                android:padding="10dp"/>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center_vertical"
-                android:padding="8dp">
-
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/district_graph"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                app:cardBackgroundColor="@color/orange"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="4dp"
+                android:layout_below="@+id/location">
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="20dp"
-                    android:layout_marginBottom="4dp"
+                    android:layout_height="match_parent"
                     android:orientation="horizontal"
-                    android:paddingLeft="20dp">
-                    <View
-                        android:layout_width="18dp"
+                    android:padding="4dp"
+                    android:weightSum="2"
+                    android:background="@drawable/gradient2">
+
+                    <org.eazegraph.lib.charts.PieChart
+                        android:id="@+id/state_piechart"
                         android:layout_height="match_parent"
-                        android:backgroundTint="@color/brown"
-                        android:background="@drawable/round_bg"/>
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        app:egDrawValueInPie="true"
+                        app:egLegendHeight="0dp"
+                        app:egInnerPaddingColor="@color/cardview_shadow_start_color"
+                        app:egValueTextSize="0dp"
+                        android:padding="10dp"/>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto"
-                        android:paddingStart="10dp"
-                        android:paddingLeft="10dp"
-                        android:text="Active Cases" />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="20dp"
-                    android:layout_marginBottom="4dp"
-                    android:orientation="horizontal"
-                    android:paddingLeft="20dp">
-                    <View
-                        android:layout_width="18dp"
+                    <LinearLayout
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:backgroundTint="@color/blue"
-                        android:background="@drawable/round_bg"/>
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center_vertical"
+                        android:padding="8dp">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto"
-                        android:paddingStart="10dp"
-                        android:paddingLeft="10dp"
-                        android:text="Confirmed Cases" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingStart="20dp"
+                            android:layout_marginBottom="4dp"
+                            android:orientation="horizontal"
+                            android:paddingLeft="20dp">
+                            <View
+                                android:layout_width="18dp"
+                                android:layout_height="match_parent"
+                                android:backgroundTint="@color/brown"
+                                android:background="@drawable/round_bg"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto"
+                                android:paddingStart="10dp"
+                                android:paddingLeft="10dp"
+                                android:text="Active Cases" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingStart="20dp"
+                            android:layout_marginBottom="4dp"
+                            android:orientation="horizontal"
+                            android:paddingLeft="20dp">
+                            <View
+                                android:layout_width="18dp"
+                                android:layout_height="match_parent"
+                                android:backgroundTint="@color/blue"
+                                android:background="@drawable/round_bg"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto"
+                                android:paddingStart="10dp"
+                                android:paddingLeft="10dp"
+                                android:text="Confirmed Cases" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingStart="20dp"
+                            android:layout_marginBottom="4dp"
+                            android:orientation="horizontal"
+                            android:paddingLeft="20dp">
+                            <View
+                                android:layout_width="18dp"
+                                android:layout_height="match_parent"
+                                android:backgroundTint="@color/green"
+                                android:background="@drawable/round_bg"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto"
+                                android:paddingStart="10dp"
+                                android:paddingLeft="10dp"
+                                android:text="Recovered Cases" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingStart="20dp"
+                            android:layout_marginBottom="4dp"
+                            android:orientation="horizontal"
+                            android:paddingLeft="20dp">
+                            <View
+                                android:layout_width="18dp"
+                                android:layout_height="match_parent"
+                                android:backgroundTint="@color/red"
+                                android:background="@drawable/round_bg"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto"
+                                android:paddingStart="10dp"
+                                android:paddingLeft="10dp"
+                                android:text="Deaths" />
+                        </LinearLayout>
+                    </LinearLayout>
+
                 </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="20dp"
-                    android:layout_marginBottom="4dp"
-                    android:orientation="horizontal"
-                    android:paddingLeft="20dp">
-                    <View
-                        android:layout_width="18dp"
-                        android:layout_height="match_parent"
-                        android:backgroundTint="@color/green"
-                        android:background="@drawable/round_bg"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto"
-                        android:paddingStart="10dp"
-                        android:paddingLeft="10dp"
-                        android:text="Recovered Cases" />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="20dp"
-                    android:layout_marginBottom="4dp"
-                    android:orientation="horizontal"
-                    android:paddingLeft="20dp">
-                    <View
-                        android:layout_width="18dp"
-                        android:layout_height="match_parent"
-                        android:backgroundTint="@color/red"
-                        android:background="@drawable/round_bg"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto"
-                        android:paddingStart="10dp"
-                        android:paddingLeft="10dp"
-                        android:text="Deaths" />
-                </LinearLayout>
-            </LinearLayout>
-
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
+            </com.google.android.material.card.MaterialCardView>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -301,6 +300,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:orientation="horizontal"
+                android:layout_marginBottom="2dp"
                 android:weightSum="2">
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="0dp"
@@ -418,6 +418,34 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:background="@drawable/gradient2"
+                android:padding="4dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="2dp"
+                    android:layout_marginStart="4dp"
+                    android:text="Last Updated at : "
+                    android:textColor="@color/dark_green"
+                    android:fontFamily="@font/roboto"
+                    android:textSize="18sp"
+                    android:layout_marginLeft="4dp" />
+                <TextView
+                    android:id="@+id/affected_countries"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="2dp"
+                    android:text="9 may 8:30pm"
+                    android:textColor="@color/dark_green"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/roboto"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"
                 android:orientation="horizontal">
@@ -428,7 +456,7 @@
                     android:textColor="@color/red"
                     android:fontFamily="@font/roboto"/>
                 <TextView
-                    android:id="@+id/district_note"
+                    android:id="@+id/state_note"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="here is some important informaion."
@@ -436,41 +464,55 @@
 
             </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:background="@drawable/gradient4"
-                    android:weightSum="2"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
+            <SearchView
+                android:id="@+id/search_district"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:animationCache="true"
+                android:background="@drawable/gradient3"
+                android:iconifiedByDefault="false"
+                android:padding="2dp"
+                android:layout_margin="4dp"
+                android:queryBackground="@android:color/transparent"
+                android:searchIcon="@drawable/search_icon"
+                android:queryHint="Search District "/>
 
-                    <com.airbnb.lottie.LottieAnimationView
-                        android:id="@+id/lottieAnimationView"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginLeft="10dp"
-                        app:lottie_rawRes="@raw/stay_home_anim"
-                        app:lottie_autoPlay="true"
-                        app:lottie_loop="true"
-                        android:scaleType="fitCenter"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:background="@drawable/gradient5"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="2dp">
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/aref_ruqaa_bold"
-                        android:gravity="center_vertical"
-                        android:layout_marginStart="4dp"
-                        android:text="All you\nhave to do\nJust Stay Home"
-                        android:textColor="@color/white"
-                        android:textSize="20dp" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="Districts"
+                    android:paddingStart="10dp"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/roboto"
+                    android:paddingLeft="10dp" />
 
-                </LinearLayout>
-
+            </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/district_rv"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:nestedScrollingEnabled="true"
+                android:layout_marginTop="2dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="2dp"/>
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+
 </RelativeLayout>
