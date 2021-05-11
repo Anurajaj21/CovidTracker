@@ -109,7 +109,7 @@
                             <View
                                 android:layout_width="18dp"
                                 android:layout_height="match_parent"
-                                android:backgroundTint="@color/brown"
+                                android:backgroundTint="@color/pink"
                                 android:background="@drawable/round_bg"/>
 
                             <TextView
@@ -219,8 +219,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="325356"
-                            android:textColor="@color/brown"
-                            android:layout_marginTop="24dp"
+                            android:textColor="@color/pink"
+                            android:layout_marginTop="28dp"
                             android:layout_marginBottom="2dp"
                             android:textSize="24sp"
                             android:fontFamily="@font/roboto"/>
@@ -229,7 +229,6 @@
                             android:id="@+id/wo_delta_actcive"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="+4678"
                             android:fontFamily="@font/roboto"
                             android:layout_marginTop="4dp"
                             android:textSize="16sp"/>
@@ -278,7 +277,7 @@
                             android:layout_height="wrap_content"
                             android:text="325356"
                             android:textColor="@color/blue"
-                            android:layout_marginTop="24dp"
+                            android:layout_marginTop="28dp"
                             android:layout_marginBottom="2dp"
                             android:textSize="24sp"
                             android:fontFamily="@font/roboto"/>
@@ -341,7 +340,7 @@
                             android:layout_height="wrap_content"
                             android:text="325356"
                             android:textColor="@color/green"
-                            android:layout_marginTop="24dp"
+                            android:layout_marginTop="28dp"
                             android:layout_marginBottom="2dp"
                             android:textSize="24sp"
                             android:fontFamily="@font/roboto"/>
@@ -397,7 +396,7 @@
                             android:layout_height="wrap_content"
                             android:text="325356"
                             android:textColor="@color/red"
-                            android:layout_marginTop="24dp"
+                            android:layout_marginTop="28dp"
                             android:layout_marginBottom="2dp"
                             android:textSize="24sp"
                             android:fontFamily="@font/roboto"/>
@@ -461,19 +460,12 @@
                             android:layout_height="wrap_content"
                             android:text="325356"
                             android:textColor="@color/teal_700"
-                            android:layout_marginTop="24dp"
+                            android:layout_marginTop="28dp"
                             android:layout_marginBottom="2dp"
                             android:textSize="24sp"
                             android:fontFamily="@font/roboto"/>
 
-                        <TextView
-                            android:id="@+id/wo_delta_critical"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="+4678"
-                            android:fontFamily="@font/roboto"
-                            android:layout_marginTop="4dp"
-                            android:textSize="16sp"/>
+
                     </LinearLayout>
 
                     <TextView
@@ -517,19 +509,12 @@
                             android:layout_height="wrap_content"
                             android:text="325356"
                             android:textColor="@color/purple_700"
-                            android:layout_marginTop="24dp"
+                            android:layout_marginTop="28dp"
                             android:layout_marginBottom="2dp"
                             android:textSize="24sp"
                             android:fontFamily="@font/roboto"/>
 
-                        <TextView
-                            android:id="@+id/wo_delta_tests"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="+4678"
-                            android:fontFamily="@font/roboto"
-                            android:layout_marginTop="4dp"
-                            android:textSize="16sp"/>
+
                     </LinearLayout>
 
                     <TextView
