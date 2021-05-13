@@ -207,21 +207,13 @@
                     android:id="@+id/ds_active_cases"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="325356"
+                    tools:text="325356"
                     android:textColor="@color/brown"
                     android:layout_marginTop="24dp"
                     android:layout_marginBottom="2dp"
                     android:textSize="24sp"
                     android:fontFamily="@font/roboto"/>
 
-                <TextView
-                    android:id="@+id/ds_delta_actcive"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="+4678"
-                    android:fontFamily="@font/roboto"
-                    android:layout_marginTop="4dp"
-                    android:textSize="16sp"/>
 
             </LinearLayout>
 
@@ -265,7 +257,7 @@
                     android:id="@+id/ds_confirmed_cases"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="325356"
+                    tools:text="325356"
                     android:textColor="@color/blue"
                     android:layout_marginTop="24dp"
                     android:layout_marginBottom="2dp"
@@ -276,7 +268,7 @@
                     android:id="@+id/ds_delta_confirmed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="+4678"
+                    tools:text="+4678"
                     android:fontFamily="@font/roboto"
                     android:layout_marginTop="4dp"
                     android:textSize="16sp"/>
@@ -329,7 +321,7 @@
                     android:id="@+id/ds_recovered_cases"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="325356"
+                    tools:text="325356"
                     android:textColor="@color/green"
                     android:layout_marginTop="24dp"
                     android:layout_marginBottom="2dp"
@@ -340,7 +332,7 @@
                     android:id="@+id/ds_delta_recovered"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="+4678"
+                    tools:text="+4678"
                     android:fontFamily="@font/roboto"
                     android:layout_marginTop="4dp"
                     android:textSize="16sp"/>
@@ -385,7 +377,7 @@
                     android:id="@+id/ds_death_cases"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="325356"
+                    tools:text="325356"
                     android:textColor="@color/red"
                     android:layout_marginTop="24dp"
                     android:layout_marginBottom="2dp"
@@ -396,7 +388,7 @@
                     android:id="@+id/ds_delta_deaths"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="+4678"
+                    tools:text="+4678"
                     android:fontFamily="@font/roboto"
                     android:layout_marginTop="4dp"
                     android:textSize="16sp"/>
@@ -433,7 +425,7 @@
                 android:id="@+id/district_note"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="here is some important informaion."
+                tools:text="here is some important informaion."
                 android:fontFamily="@font/roboto"/>
 
         </LinearLayout>

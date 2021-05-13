@@ -1,5 +1,6 @@
 package com.example.covidtracker.Fragments
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -46,14 +47,15 @@ class CountryFragment(private val unit: countryDataItem) : Fragment() {
         return view
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setData(){
         ct_active_cases.text = unit.active.toString()
         ct_confirmed_cases.text = unit.cases.toString()
-        ct_delta_confirmed.text = unit.todayCases.toString()
+        ct_delta_confirmed.text = "+" + unit.todayCases.toString()
         ct_recovered_cases.text = unit.recovered.toString()
-        ct_delta_recovered.text = unit.todayRecovered.toString()
+        ct_delta_recovered.text = "+" + unit.todayRecovered.toString()
         ct_death_cases.text = unit.deaths.toString()
-        ct_delta_deaths.text = unit.todayDeaths.toString()
+        ct_delta_deaths.text = "+" + unit.todayDeaths.toString()
         ct_critical_cases.text = unit.critical.toString()
         ct_tests.text = unit.tests.toString()
     }

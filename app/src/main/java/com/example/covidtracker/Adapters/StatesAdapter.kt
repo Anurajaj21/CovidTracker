@@ -26,7 +26,7 @@ class StatesAdapter(val list : ArrayList<Statewise>, val tests : ArrayList<Teste
     override fun onBindViewHolder(holder: StatesViewHolder, position: Int) {
 //        if (list[position].state != "Total") {
             holder.view.name.text = list[position].state + " (" + list[position].statecode + ")"
-            holder.view.cases.text = list[position].active
+            holder.view.cases.text = list[position].confirmed
             val unit1 = list[position]
             val unit2 = tests[position]
 

@@ -31,7 +31,7 @@ interface ApiInterface {
     @GET("data.json")
    suspend fun StateResponse(): Response<DataResponse>
 
-    @GET("state_district_wise")
-    suspend fun DistrictResponse(@Query("state") state : String): Response<DistrictResponse>
+    @GET("state_district_wise.json")
+    suspend fun DistrictResponse(): Response<DistrictResponse>
 
 }

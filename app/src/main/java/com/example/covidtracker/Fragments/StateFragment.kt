@@ -1,5 +1,6 @@
 package com.example.covidtracker.Fragments
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -19,6 +20,7 @@ import com.example.covidtracker.Network.ApiClient
 import com.example.covidtracker.Network.ApiInterface
 import com.example.covidtracker.R
 import com.example.covidtracker.Utils.LoadingUtils
+import kotlinx.android.synthetic.main.fragment_district.*
 import kotlinx.android.synthetic.main.fragment_india.*
 import kotlinx.android.synthetic.main.fragment_india.in_active_cases
 import kotlinx.android.synthetic.main.fragment_state.*
@@ -33,10 +35,11 @@ import retrofit2.Response
 class StateFragment(private val unit1: Statewise, private  val unit2: Tested) : Fragment() {
 
     lateinit var adapter : RecyclerView.Adapter<DistrictAdapter.DistrictViewHolder>
-    var list = ArrayList<DistrictResponseItem>()
+    var list = ArrayList<DistrictData>()
     val stateClient = ApiClient("https://api.covid19india.org/v2/")
     val response : MutableLiveData<Response<DistrictResponse>> = MutableLiveData()
 
+    @ExperimentalStdlibApi
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,8 +52,9 @@ class StateFragment(private val unit1: Statewise, private  val unit2: Tested) : 
 
         GlobalScope.launch(Dispatchers.Main){
             LoadingUtils.showDialog(requireContext(), true)
-            response.value = apiInterface?.DistrictResponse(unit1.state)
+            response.value = apiInterface?.DistrictResponse()
             LoadingUtils.hideDialog()
+            Log.d("district data", response.value?.body().toString())
             setData()
             state_piechart.clearChart()
             setPiechart()
@@ -72,24 +76,38 @@ class StateFragment(private val unit1: Statewise, private  val unit2: Tested) : 
 
     }
 
+    @ExperimentalStdlibApi
+    @SuppressLint("SetTextI18n")
     private fun setData(){
         st_active_cases.text = unit1.active
         st_confirmed_cases.text = unit1.confirmed
-        st_delta_confirmed.text = unit1.deltaconfirmed
+        st_delta_confirmed.text = "+" + unit1.deltaconfirmed
         st_recovered_cases.text = unit1.recovered
-        st_delta_recovered.text = unit1.deltarecovered
-        st_death_cases.text = unit1.deltadeaths
+        st_delta_recovered.text = "+" + unit1.deltarecovered
+        st_death_cases.text = unit1.deaths
+        st_delta_deaths.text = "+" + unit1.deltadeaths
         state_note.text = unit1.statenotes
         st_update.text = unit1.lastupdatedtime
         st_tests.text = unit2.totalsamplestested
         st_delta_tests.text = unit2.totalsamplestested
 
-        response.observe(viewLifecycleOwner, Observer {response->
+        if(unit1.statenotes == ""){
+            state_note.text = "-----"
+        }else{
+            state_note.text = unit1.statenotes
+        }
+
+        response.observe(viewLifecycleOwner, { response->
             if (response.code() == 200){
-                list.addAll(response.body()!!)
-                adapter = DistrictAdapter(list)
-                Log.d("district data", response.body()!![2].districtData.toString())
-                adapter.notifyDataSetChanged()
+                for (i in response.body()!!){
+//                    Log.d("district", i.toString())
+                    if(unit1.state.lowercase().equals(i.state.lowercase())){
+                        Log.d("district", i.state)
+                        list.addAll(i.districtData)
+                        adapter.notifyDataSetChanged()
+                    }
+                }
+//                adapter.notifyDataSetChanged()
             }
         })
     }

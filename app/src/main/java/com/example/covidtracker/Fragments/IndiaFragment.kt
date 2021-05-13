@@ -1,5 +1,6 @@
 package com.example.covidtracker.Fragments
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -23,6 +24,7 @@ import com.example.covidtracker.Network.ApiClient
 import com.example.covidtracker.Network.ApiInterface
 import com.example.covidtracker.R
 import com.example.covidtracker.Utils.LoadingUtils
+import kotlinx.android.synthetic.main.fragment_district.*
 import kotlinx.android.synthetic.main.fragment_india.*
 import kotlinx.android.synthetic.main.fragment_world.*
 import kotlinx.coroutines.Dispatchers
@@ -72,6 +74,7 @@ class IndiaFragment : Fragment() {
     }
 
 
+    @SuppressLint("SetTextI18n")
     private fun fetchData() {
 
         response.observe(viewLifecycleOwner, { response->
@@ -89,16 +92,21 @@ class IndiaFragment : Fragment() {
 
                 in_active_cases.text = ind.active
                 in_confirmed_cases.text = ind.confirmed
-                in_delta_confirmed.text = ind.deltaconfirmed
+                in_delta_confirmed.text = "+" + ind.deltaconfirmed
                 in_recovered_cases.text = ind.recovered
-                in_delta_recovered.text = ind.deltarecovered
+                in_delta_recovered.text = "+" + ind.deltarecovered
                 in_death_cases.text = ind.deaths
-                in_delta_deaths.text = ind.deltadeaths
+                in_delta_deaths.text = "+" + ind.deltadeaths
                 india_note.text = ind.statenotes
                 in_update.text = ind.lastupdatedtime
                 in_tests.text = ind_test.totalsamplestested
                 in_delta_tests.text = ind_test.totalsamplestested
                 in_migrated.text = ind.migratedother
+                if(ind.statenotes == ""){
+                    india_note.text = "-----"
+                }else{
+                    india_note.text = ind.statenotes
+                }
 
                 india_piechart.clearChart()
                 setPiechart()
