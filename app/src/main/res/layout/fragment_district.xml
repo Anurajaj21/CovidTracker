@@ -70,7 +70,7 @@
             android:background="@drawable/gradient2">
 
             <org.eazegraph.lib.charts.PieChart
-                android:id="@+id/state_piechart"
+                android:id="@+id/district_piechart"
                 android:layout_height="match_parent"
                 android:layout_width="0dp"
                 android:layout_weight="1"
@@ -204,7 +204,7 @@
                 android:orientation="vertical" >
 
                 <TextView
-                    android:id="@+id/st_active_cases"
+                    android:id="@+id/ds_active_cases"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="325356"
@@ -215,7 +215,7 @@
                     android:fontFamily="@font/roboto"/>
 
                 <TextView
-                    android:id="@+id/st_delta_actcive"
+                    android:id="@+id/ds_delta_actcive"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="+4678"
@@ -262,7 +262,7 @@
                 app:layout_constraintTop_toTopOf="parent" >
 
                 <TextView
-                    android:id="@+id/st_confirmed_cases"
+                    android:id="@+id/ds_confirmed_cases"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="325356"
@@ -273,7 +273,7 @@
                     android:fontFamily="@font/roboto"/>
 
                 <TextView
-                    android:id="@+id/st_delta_confirmed"
+                    android:id="@+id/ds_delta_confirmed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="+4678"
@@ -326,7 +326,7 @@
                 android:orientation="vertical" >
 
                 <TextView
-                    android:id="@+id/st_recovered_cases"
+                    android:id="@+id/ds_recovered_cases"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="325356"
@@ -337,7 +337,7 @@
                     android:fontFamily="@font/roboto"/>
 
                 <TextView
-                    android:id="@+id/st_delta_recovered"
+                    android:id="@+id/ds_delta_recovered"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="+4678"
@@ -382,7 +382,7 @@
                 app:layout_constraintTop_toTopOf="parent" >
 
                 <TextView
-                    android:id="@+id/st_death_cases"
+                    android:id="@+id/ds_death_cases"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="325356"
@@ -393,7 +393,7 @@
                     android:fontFamily="@font/roboto"/>
 
                 <TextView
-                    android:id="@+id/st_delta_deaths"
+                    android:id="@+id/ds_delta_deaths"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="+4678"
@@ -430,7 +430,7 @@
                 android:textColor="@color/red"
                 android:fontFamily="@font/roboto"/>
             <TextView
-                android:id="@+id/state_note"
+                android:id="@+id/district_note"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="here is some important informaion."

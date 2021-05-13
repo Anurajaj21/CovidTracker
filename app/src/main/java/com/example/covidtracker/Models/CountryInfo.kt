@@ -5,6 +5,6 @@ data class CountryInfo(
     val flag: String,
     val iso2: String,
     val iso3: String,
-    val lat: Int,
-    val long: Int
+    val lat: Float,
+    val long: Float
 )

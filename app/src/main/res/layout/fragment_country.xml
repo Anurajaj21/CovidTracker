@@ -219,14 +219,6 @@
                             android:textSize="24sp"
                             android:fontFamily="@font/roboto"/>
 
-                        <TextView
-                            android:id="@+id/ct_delta_actcive"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="+4678"
-                            android:fontFamily="@font/roboto"
-                            android:layout_marginTop="4dp"
-                            android:textSize="16sp"/>
 
                     </LinearLayout>
 
@@ -278,7 +270,7 @@
                             android:fontFamily="@font/roboto"/>
 
                         <TextView
-                            android:id="@+id/wo_delta_confirmed"
+                            android:id="@+id/ct_delta_confirmed"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="+4678"
@@ -460,14 +452,7 @@
                             android:textSize="24sp"
                             android:fontFamily="@font/roboto"/>
 
-                        <TextView
-                            android:id="@+id/ct_delta_critical"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="+4678"
-                            android:fontFamily="@font/roboto"
-                            android:layout_marginTop="4dp"
-                            android:textSize="16sp"/>
+                        
                     </LinearLayout>
 
                     <TextView
@@ -516,14 +501,7 @@
                             android:textSize="24sp"
                             android:fontFamily="@font/roboto"/>
 
-                        <TextView
-                            android:id="@+id/ct_delta_tests"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="+4678"
-                            android:fontFamily="@font/roboto"
-                            android:layout_marginTop="4dp"
-                            android:textSize="16sp"/>
+
                     </LinearLayout>
 
                     <TextView

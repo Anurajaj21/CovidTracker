@@ -4,7 +4,7 @@ data class countryDataItem(
     val active: Int,
     val cases: Int,
     val country: String,
-//    val countryInfo: CountryInfo,
+    val countryInfo: CountryInfo,
     val critical: Int,
     val deaths: Int,
     val recovered: Int,
@@ -12,6 +12,5 @@ data class countryDataItem(
     val todayCases: Int,
     val todayDeaths: Int,
     val todayRecovered: Int,
-    val flag: String,
     val updated: Long
 )

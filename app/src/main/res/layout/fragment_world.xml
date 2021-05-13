@@ -109,7 +109,7 @@
                             <View
                                 android:layout_width="18dp"
                                 android:layout_height="match_parent"
-                                android:backgroundTint="@color/pink"
+                                android:backgroundTint="@color/brown"
                                 android:background="@drawable/round_bg"/>
 
                             <TextView
@@ -218,12 +218,12 @@
                             android:id="@+id/wo_active_cases"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="325356"
-                            android:textColor="@color/pink"
                             android:layout_marginTop="28dp"
                             android:layout_marginBottom="2dp"
-                            android:textSize="24sp"
-                            android:fontFamily="@font/roboto"/>
+                            android:fontFamily="@font/roboto"
+                            tools:text="325356"
+                            android:textColor="@color/brown"
+                            android:textSize="24sp" />
 
                         <TextView
                             android:id="@+id/wo_delta_actcive"
@@ -275,7 +275,7 @@
                             android:id="@+id/wo_confirmed_cases"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="325356"
+                            tools:text="325356"
                             android:textColor="@color/blue"
                             android:layout_marginTop="28dp"
                             android:layout_marginBottom="2dp"
@@ -286,7 +286,7 @@
                             android:id="@+id/wo_delta_confirmed"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="+4678"
+                            tools:text="+4678"
                             android:fontFamily="@font/roboto"
                             android:layout_marginTop="4dp"
                             android:textSize="16sp"/>
@@ -338,7 +338,7 @@
                             android:id="@+id/wo_recovered_cases"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="325356"
+                            tools:text="325356"
                             android:textColor="@color/green"
                             android:layout_marginTop="28dp"
                             android:layout_marginBottom="2dp"
@@ -349,7 +349,7 @@
                             android:id="@+id/wo_delta_recovered"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="+4678"
+                            tools:text="+4678"
                             android:fontFamily="@font/roboto"
                             android:layout_marginTop="4dp"
                             android:textSize="16sp"/>
@@ -394,7 +394,7 @@
                             android:id="@+id/wo_death_cases"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="325356"
+                            tools:text="325356"
                             android:textColor="@color/red"
                             android:layout_marginTop="28dp"
                             android:layout_marginBottom="2dp"
@@ -405,7 +405,7 @@
                             android:id="@+id/wo_delta_deaths"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="+4678"
+                            tools:text="+4678"
                             android:fontFamily="@font/roboto"
                             android:layout_marginTop="4dp"
                             android:textSize="16sp"/>
@@ -458,7 +458,7 @@
                             android:id="@+id/wo_critical_cases"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="325356"
+                            tools:text="325356"
                             android:textColor="@color/teal_700"
                             android:layout_marginTop="28dp"
                             android:layout_marginBottom="2dp"
@@ -507,7 +507,7 @@
                             android:id="@+id/wo_tests"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="325356"
+                            tools:text="325356"
                             android:textColor="@color/purple_700"
                             android:layout_marginTop="28dp"
                             android:layout_marginBottom="2dp"
@@ -555,7 +555,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="2dp"
-                    android:text="57"
+                    tools:text="57"
                     android:textColor="@color/dark_green"
                     android:textSize="18sp"
                     android:fontFamily="@font/roboto"/>
