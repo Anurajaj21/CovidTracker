@@ -215,189 +215,274 @@
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:orientation="horizontal"
-        android:weightSum="2">
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
 
             <LinearLayout
                 android:id="@+id/active"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:layout_marginStart="4dp"
                 android:layout_marginLeft="4dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="2dp"
                 android:layout_marginRight="2dp"
-                android:gravity="center_horizontal"
                 android:background="@drawable/gradient2"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:orientation="vertical" >
+                app:layout_constraintTop_toTopOf="parent">
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:gravity="center"
+                    android:padding="6dp"
+                    android:text="Active"
+                    android:textAllCaps="false"
+                    android:textColor="@color/dark_green"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
                 <TextView
                     android:id="@+id/in_active_cases"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:fontFamily="@font/roboto"
                     tools:text="325356"
                     android:textColor="@color/brown"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginBottom="2dp"
-                    android:textSize="24sp"
-                    android:fontFamily="@font/roboto"/>
-
+                    android:textSize="24sp" />
 
             </LinearLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="Active"
-                android:textAllCaps="false"
-                android:textColor="@color/dark_green"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/active"
-                app:layout_constraintTop_toTopOf="@+id/active"
-                tools:ignore="MissingConstraints" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
 
             <LinearLayout
                 android:id="@+id/confirmed"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:layout_marginStart="2dp"
                 android:layout_marginLeft="2dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="4dp"
                 android:layout_marginRight="4dp"
-                android:gravity="center_horizontal"
                 android:background="@drawable/gradient2"
+                android:gravity="center_horizontal"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" >
+                app:layout_constraintTop_toTopOf="parent">
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:gravity="center"
+                    android:padding="6dp"
+                    android:text="Confirmed"
+                    android:textColor="@color/dark_green"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
                 <TextView
                     android:id="@+id/in_confirmed_cases"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="325356"
-                    android:textColor="@color/blue"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="2dp"
                     android:layout_marginBottom="2dp"
+                    android:fontFamily="@font/roboto"
+                    android:textColor="@color/blue"
                     android:textSize="24sp"
-                    android:fontFamily="@font/roboto"/>
+                    tools:text="325356" />
 
                 <TextView
                     android:id="@+id/in_delta_confirmed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="+4678"
+                    android:layout_marginTop="2dp"
                     android:fontFamily="@font/roboto"
-                    android:layout_marginTop="4dp"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp"
+                    tools:text="+4678" />
             </LinearLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="Confirmed"
-                android:textColor="@color/dark_green"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/confirmed"
-                app:layout_constraintTop_toTopOf="@+id/confirmed"
-                tools:ignore="MissingConstraints" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </LinearLayout>
+        </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:orientation="horizontal"
-        android:weightSum="2">
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
 
             <LinearLayout
                 android:id="@+id/recovered"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:layout_marginStart="4dp"
                 android:layout_marginLeft="4dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="2dp"
                 android:layout_marginRight="2dp"
-                android:gravity="center_horizontal"
                 android:background="@drawable/gradient2"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:orientation="vertical" >
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:gravity="center"
+                    android:padding="6dp"
+                    android:text="Recovered"
+                    android:textColor="@color/dark_green"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/in_recovered_cases"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="325356"
-                    android:textColor="@color/green"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="2dp"
                     android:layout_marginBottom="2dp"
+                    android:fontFamily="@font/roboto"
+                    android:textColor="@color/green"
                     android:textSize="24sp"
-                    android:fontFamily="@font/roboto"/>
+                    tools:text="325356" />
 
                 <TextView
                     android:id="@+id/in_delta_recovered"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="+4678"
+                    android:layout_marginTop="2dp"
                     android:fontFamily="@font/roboto"
-                    android:layout_marginTop="4dp"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp"
+                    tools:text="+4678" />
             </LinearLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="Recovered"
-                android:textColor="@color/dark_green"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/recovered"
-                app:layout_constraintTop_toTopOf="@+id/recovered"
-                tools:ignore="MissingConstraints" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
 
             <LinearLayout
                 android:id="@+id/deaths"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginStart="2dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginRight="4dp"
+                android:background="@drawable/gradient2"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:gravity="center"
+                    android:padding="6dp"
+                    android:text="Deaths"
+                    android:textColor="@color/dark_green"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/in_death_cases"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:fontFamily="@font/roboto"
+                    android:textColor="@color/red"
+                    android:textSize="24sp"
+                    tools:text="325356" />
+
+                <TextView
+                    android:id="@+id/in_delta_deaths"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="@font/roboto"
+                    android:textSize="16sp"
+                    tools:text="+4678" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:orientation="horizontal"
+            android:layout_marginBottom="4dp"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:id="@+id/tests"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginStart="4dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="2dp"
+                android:layout_marginRight="2dp"
+                android:background="@drawable/gradient2"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:gravity="center"
+                    android:padding="6dp"
+                    android:text="Tests"
+                    android:textColor="@color/dark_green"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/in_tests"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="325356"
+                    android:textColor="@color/teal_700"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:textSize="24sp"
+                    android:fontFamily="@font/roboto"/>
+                <TextView
+                    android:id="@+id/in_delta_tests"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="@font/roboto"
+                    android:textSize="16sp"
+                    tools:text="+4678" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/migrated"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:layout_marginStart="2dp"
                 android:layout_marginLeft="2dp"
                 android:layout_marginTop="10dp"
@@ -411,154 +496,27 @@
                 app:layout_constraintTop_toTopOf="parent" >
 
                 <TextView
-                    android:id="@+id/in_death_cases"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:gravity="center"
+                    android:padding="6dp"
+                    android:text="Migrated"
+                    android:textColor="@color/dark_green"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/in_migrated"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="325356"
-                    android:textColor="@color/red"
-                    android:layout_marginTop="24dp"
+                    android:text="325356"
+                    android:textColor="@color/purple_700"
+                    android:layout_marginTop="2dp"
                     android:layout_marginBottom="2dp"
                     android:textSize="24sp"
                     android:fontFamily="@font/roboto"/>
 
-                <TextView
-                    android:id="@+id/in_delta_deaths"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="+4678"
-                    android:fontFamily="@font/roboto"
-                    android:layout_marginTop="4dp"
-                    android:textSize="16sp"/>
             </LinearLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="Deaths"
-                android:textColor="@color/dark_green"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/deaths"
-                app:layout_constraintTop_toTopOf="@+id/deaths"
-                tools:ignore="MissingConstraints" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:orientation="horizontal"
-            android:layout_marginBottom="2dp"
-            android:weightSum="2">
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <LinearLayout
-                    android:id="@+id/tests"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="2dp"
-                    android:layout_marginRight="2dp"
-                    android:gravity="center_horizontal"
-                    android:background="@drawable/gradient2"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:orientation="vertical" >
-
-                    <TextView
-                        android:id="@+id/in_tests"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        tools:text="325356"
-                        android:textColor="@color/teal_700"
-                        android:layout_marginTop="24dp"
-                        android:layout_marginBottom="2dp"
-                        android:textSize="24sp"
-                        android:fontFamily="@font/roboto"/>
-
-                    <TextView
-                        android:id="@+id/in_delta_tests"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        tools:text="+4678"
-                        android:fontFamily="@font/roboto"
-                        android:layout_marginTop="4dp"
-                        android:textSize="16sp"/>
-
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto"
-                    android:gravity="center"
-                    android:padding="10dp"
-                    android:text="Tests"
-                    android:textColor="@color/dark_green"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@+id/tests"
-                    app:layout_constraintTop_toTopOf="@+id/tests"
-                    tools:ignore="MissingConstraints" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <LinearLayout
-                    android:id="@+id/migrated"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="2dp"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="4dp"
-                    android:layout_marginRight="4dp"
-                    android:gravity="center_horizontal"
-                    android:background="@drawable/gradient2"
-                    android:orientation="vertical"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" >
-
-                    <TextView
-                        android:id="@+id/in_migrated"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        tools:text="325356"
-                        android:textColor="@color/purple_700"
-                        android:layout_marginTop="24dp"
-                        android:layout_marginBottom="2dp"
-                        android:textSize="24sp"
-                        android:fontFamily="@font/roboto"/>
-
-
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto"
-                    android:gravity="center"
-                    android:padding="10dp"
-                    android:text="Migrate"
-                    android:textColor="@color/dark_green"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@+id/migrated"
-                    app:layout_constraintTop_toTopOf="@+id/migrated"
-                    tools:ignore="MissingConstraints" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
 
         <LinearLayout

@@ -55,7 +55,6 @@ class StateFragment(private val unit1: Statewise, private  val unit2: Tested) : 
         // Inflate the layout for this fragment
         val view =  inflater.inflate(R.layout.fragment_state, container, false)
         val recyclerView = view.findViewById<RecyclerView>(R.id.district_rv)
-//        val apiInterface = stateClient.getApiClient()?.create(ApiInterface::class.java)
 
         val refresh = view.findViewById<SwipeRefreshLayout>(R.id.state_refresh)
         val retry = view.findViewById<Button>(R.id.st_retry)
@@ -89,15 +88,7 @@ class StateFragment(private val unit1: Statewise, private  val unit2: Tested) : 
             }
             refresh.isRefreshing = false
         }
-//        GlobalScope.launch(Dispatchers.Main){
-//            LoadingUtils.showDialog(requireContext(), true)
-//            response.value = apiInterface?.DistrictResponse()
-//            LoadingUtils.hideDialog()
-//            Log.d("district data", response.value?.body().toString())
-//            setData(view)
-//            state_piechart.clearChart()
-//            setPiechart()
-//        }
+
         adapter = DistrictAdapter(list)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())

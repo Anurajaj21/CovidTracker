@@ -69,14 +69,14 @@
                     android:textStyle="bold" />
 
             </LinearLayout>
-            <!--    <androidx.appcompat.widget.Toolbar-->
-            <!--        android:id="@+id/location"-->
-            <!--        android:layout_width="match_parent"-->
-            <!--        android:layout_height="wrap_content"-->
-            <!--        android:background="@drawable/gradient3"-->
-            <!--        android:layout_marginBottom="2dp"-->
-            <!--        app:title="District name"-->
-            <!--        app:titleTextColor="@color/dark_green" />-->
+<!--                <androidx.appcompat.widget.Toolbar-->
+<!--                    android:id="@+id/location"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:background="@drawable/gradient3"-->
+<!--                    android:layout_marginBottom="2dp"-->
+<!--                    app:title="District name"-->
+<!--                    app:titleTextColor="@color/dark_green" />-->
 
             <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
@@ -230,15 +230,12 @@
                         android:orientation="horizontal"
                         android:weightSum="2">
 
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1">
 
                             <LinearLayout
                                 android:id="@+id/active"
-                                android:layout_width="match_parent"
+                                android:layout_width="0dp"
                                 android:layout_height="match_parent"
+                                android:layout_weight="1"
                                 android:layout_marginStart="4dp"
                                 android:layout_marginLeft="4dp"
                                 android:layout_marginTop="10dp"
@@ -252,44 +249,35 @@
                                 app:layout_constraintTop_toTopOf="parent">
 
                                 <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/roboto"
+                                    android:gravity="center"
+                                    android:padding="6dp"
+                                    android:text="Active"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/dark_green"
+                                    android:textSize="20dp"
+                                    android:textStyle="bold" />
+                                <TextView
                                     android:id="@+id/ho_active_cases"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="24dp"
+                                    android:layout_marginTop="2dp"
                                     android:layout_marginBottom="2dp"
                                     android:fontFamily="@font/roboto"
-                                    android:text="325356"
+                                    tools:text="325356"
                                     android:textColor="@color/brown"
                                     android:textSize="24sp" />
 
-
                             </LinearLayout>
 
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/roboto"
-                                android:gravity="center"
-                                android:padding="10dp"
-                                android:text="Active"
-                                android:textAllCaps="false"
-                                android:textColor="@color/dark_green"
-                                android:textSize="20dp"
-                                android:textStyle="bold"
-                                app:layout_constraintBottom_toTopOf="@+id/active"
-                                app:layout_constraintTop_toTopOf="@+id/active"
-                                tools:ignore="MissingConstraints" />
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1">
 
                             <LinearLayout
                                 android:id="@+id/confirmed"
-                                android:layout_width="match_parent"
+                                android:layout_width="0dp"
                                 android:layout_height="match_parent"
+                                android:layout_weight="1"
                                 android:layout_marginStart="2dp"
                                 android:layout_marginLeft="2dp"
                                 android:layout_marginTop="10dp"
@@ -303,10 +291,20 @@
                                 app:layout_constraintTop_toTopOf="parent">
 
                                 <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/roboto"
+                                    android:gravity="center"
+                                    android:padding="6dp"
+                                    android:text="Confirmed"
+                                    android:textColor="@color/dark_green"
+                                    android:textSize="20dp"
+                                    android:textStyle="bold" />
+                                <TextView
                                     android:id="@+id/ho_confirmed_cases"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="24dp"
+                                    android:layout_marginTop="2dp"
                                     android:layout_marginBottom="2dp"
                                     android:fontFamily="@font/roboto"
                                     android:textColor="@color/blue"
@@ -317,26 +315,12 @@
                                     android:id="@+id/ho_delta_confirmed"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="4dp"
+                                    android:layout_marginTop="2dp"
                                     android:fontFamily="@font/roboto"
                                     android:textSize="16sp"
                                     tools:text="+4678" />
                             </LinearLayout>
 
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/roboto"
-                                android:gravity="center"
-                                android:padding="10dp"
-                                android:text="Confirmed"
-                                android:textColor="@color/dark_green"
-                                android:textSize="20dp"
-                                android:textStyle="bold"
-                                app:layout_constraintBottom_toTopOf="@+id/confirmed"
-                                app:layout_constraintTop_toTopOf="@+id/confirmed"
-                                tools:ignore="MissingConstraints" />
-                        </androidx.constraintlayout.widget.ConstraintLayout>
                     </LinearLayout>
 
                     <LinearLayout
@@ -345,15 +329,12 @@
                         android:orientation="horizontal"
                         android:weightSum="2">
 
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1">
 
                             <LinearLayout
                                 android:id="@+id/recovered"
-                                android:layout_width="match_parent"
+                                android:layout_width="0dp"
                                 android:layout_height="match_parent"
+                                android:layout_weight="1"
                                 android:layout_marginStart="4dp"
                                 android:layout_marginLeft="4dp"
                                 android:layout_marginTop="10dp"
@@ -367,10 +348,20 @@
                                 app:layout_constraintTop_toTopOf="parent">
 
                                 <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/roboto"
+                                    android:gravity="center"
+                                    android:padding="6dp"
+                                    android:text="Recovered"
+                                    android:textColor="@color/dark_green"
+                                    android:textSize="20dp"
+                                    android:textStyle="bold" />
+                                <TextView
                                     android:id="@+id/ho_recovered_cases"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="24dp"
+                                    android:layout_marginTop="2dp"
                                     android:layout_marginBottom="2dp"
                                     android:fontFamily="@font/roboto"
                                     android:textColor="@color/green"
@@ -381,36 +372,18 @@
                                     android:id="@+id/ho_delta_recovered"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="4dp"
+                                    android:layout_marginTop="2dp"
                                     android:fontFamily="@font/roboto"
                                     android:textSize="16sp"
                                     tools:text="+4678" />
                             </LinearLayout>
 
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/roboto"
-                                android:gravity="center"
-                                android:padding="10dp"
-                                android:text="Recovered"
-                                android:textColor="@color/dark_green"
-                                android:textSize="20dp"
-                                android:textStyle="bold"
-                                app:layout_constraintBottom_toTopOf="@+id/recovered"
-                                app:layout_constraintTop_toTopOf="@+id/recovered"
-                                tools:ignore="MissingConstraints" />
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1">
 
                             <LinearLayout
                                 android:id="@+id/deaths"
-                                android:layout_width="match_parent"
+                                android:layout_width="0dp"
                                 android:layout_height="match_parent"
+                                android:layout_weight="1"
                                 android:layout_marginStart="2dp"
                                 android:layout_marginLeft="2dp"
                                 android:layout_marginTop="10dp"
@@ -424,10 +397,20 @@
                                 app:layout_constraintTop_toTopOf="parent">
 
                                 <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/roboto"
+                                    android:gravity="center"
+                                    android:padding="6dp"
+                                    android:text="Deaths"
+                                    android:textColor="@color/dark_green"
+                                    android:textSize="20dp"
+                                    android:textStyle="bold" />
+                                <TextView
                                     android:id="@+id/ho_death_cases"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="24dp"
+                                    android:layout_marginTop="2dp"
                                     android:layout_marginBottom="2dp"
                                     android:fontFamily="@font/roboto"
                                     android:textColor="@color/red"
@@ -438,26 +421,13 @@
                                     android:id="@+id/ho_delta_deaths"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="4dp"
+                                    android:layout_marginTop="2dp"
                                     android:fontFamily="@font/roboto"
                                     android:textSize="16sp"
                                     tools:text="+4678" />
                             </LinearLayout>
 
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/roboto"
-                                android:gravity="center"
-                                android:padding="10dp"
-                                android:text="Deaths"
-                                android:textColor="@color/dark_green"
-                                android:textSize="20dp"
-                                android:textStyle="bold"
-                                app:layout_constraintBottom_toTopOf="@+id/deaths"
-                                app:layout_constraintTop_toTopOf="@+id/deaths"
-                                tools:ignore="MissingConstraints" />
-                        </androidx.constraintlayout.widget.ConstraintLayout>
+
                     </LinearLayout>
 
                     <LinearLayout
@@ -485,7 +455,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="200dp"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="4dp"
                         android:background="@drawable/gradient4"
                         android:orientation="horizontal"
                         android:weightSum="2">

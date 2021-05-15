@@ -60,6 +60,13 @@ class HomeFragment : Fragment() {
         val refresh = view.findViewById<SwipeRefreshLayout>(R.id.home_refesh)
         val retry = view.findViewById<Button>(R.id.ho_retry)
 
+        InternetCheck{
+            if(!it){
+                home.visibility = View.GONE
+                ho_no_internet.visibility = View.VISIBLE
+            }
+        }
+
         fetchAllData(view)
 
         retry.setOnClickListener {
