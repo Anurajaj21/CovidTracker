@@ -1,3 +1,3 @@
-package com.example.covidtracker.Models
+package com.example.covidtracker.Models.World
 
 class countryData: ArrayList<countryDataItem>()

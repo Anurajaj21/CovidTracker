@@ -1,15 +1,11 @@
 package com.example.covidtracker.Network
 
-import com.example.covidtracker.Models.DataResponse
-import com.example.covidtracker.Models.DistrictResponse
-import com.example.covidtracker.Models.countryData
-import com.example.covidtracker.Models.worldData
-import retrofit2.Call
+import com.example.covidtracker.Models.India.StateResponse
+import com.example.covidtracker.Models.District.DistrictResponse
+import com.example.covidtracker.Models.World.countryData
+import com.example.covidtracker.Models.World.worldData
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
-import retrofit2.http.Query
 
 interface ApiInterface {
 
@@ -29,7 +25,7 @@ interface ApiInterface {
     suspend fun CountryResponse(): Response<countryData>
 
     @GET("data.json")
-   suspend fun StateResponse(): Response<DataResponse>
+   suspend fun StateResponse(): Response<StateResponse>
 
     @GET("state_district_wise.json")
     suspend fun DistrictResponse(): Response<DistrictResponse>

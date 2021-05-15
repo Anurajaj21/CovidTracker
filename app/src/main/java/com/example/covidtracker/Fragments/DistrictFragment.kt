@@ -7,10 +7,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.covidtracker.Models.DistrictData
+import com.example.covidtracker.Models.District.DistrictData
 import com.example.covidtracker.R
 import kotlinx.android.synthetic.main.fragment_district.*
-import kotlinx.android.synthetic.main.fragment_state.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.eazegraph.lib.models.PieModel
 
 
@@ -22,14 +24,17 @@ class DistrictFragment(private val unit: DistrictData) : Fragment() {
         // Inflate the layout for this fragment
         val view =  inflater.inflate(R.layout.fragment_district, container, false)
 
-        setData()
-        setPiechart()
+        GlobalScope.launch(Dispatchers.Main){
+            setData()
+            setPiechart()
+        }
 
         return view
     }
 
     @SuppressLint("SetTextI18n")
     private fun setData(){
+        ds_name.text = unit.district
         ds_active_cases.text = unit.active.toString()
         ds_confirmed_cases.text = unit.confirmed.toString()
         ds_delta_confirmed.text = "+" + unit.delta.confirmed.toString()
@@ -37,11 +42,7 @@ class DistrictFragment(private val unit: DistrictData) : Fragment() {
         ds_delta_recovered.text = "+" + unit.delta.recovered.toString()
         ds_death_cases.text = unit.deceased.toString()
         ds_delta_deaths.text = "+" + unit.delta.deceased.toString()
-        if(unit.notes == ""){
-            district_note.text = "-----"
-        }else{
-            district_note.text = unit.notes
-        }
+        district_note.text = unit.notes
 
     }
 

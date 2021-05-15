@@ -9,22 +9,28 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.SearchView
+import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.example.covidtracker.Adapters.CountriesAdapter
 import com.example.covidtracker.Adapters.DistrictAdapter
-import com.example.covidtracker.Models.*
+import com.example.covidtracker.Models.District.DistrictData
+import com.example.covidtracker.Models.District.DistrictResponse
+import com.example.covidtracker.Models.India.Statewise
+import com.example.covidtracker.Models.India.Tested
 import com.example.covidtracker.Network.ApiClient
 import com.example.covidtracker.Network.ApiInterface
 import com.example.covidtracker.R
+import com.example.covidtracker.Utils.InternetCheck
 import com.example.covidtracker.Utils.LoadingUtils
-import kotlinx.android.synthetic.main.fragment_district.*
 import kotlinx.android.synthetic.main.fragment_india.*
-import kotlinx.android.synthetic.main.fragment_india.in_active_cases
 import kotlinx.android.synthetic.main.fragment_state.*
-import kotlinx.android.synthetic.main.fragment_world.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -38,6 +44,7 @@ class StateFragment(private val unit1: Statewise, private  val unit2: Tested) : 
     var list = ArrayList<DistrictData>()
     val stateClient = ApiClient("https://api.covid19india.org/v2/")
     val response : MutableLiveData<Response<DistrictResponse>> = MutableLiveData()
+    private lateinit var searchDistrict : SearchView
 
     @ExperimentalStdlibApi
     @RequiresApi(Build.VERSION_CODES.N)
@@ -48,22 +55,89 @@ class StateFragment(private val unit1: Statewise, private  val unit2: Tested) : 
         // Inflate the layout for this fragment
         val view =  inflater.inflate(R.layout.fragment_state, container, false)
         val recyclerView = view.findViewById<RecyclerView>(R.id.district_rv)
-        val apiInterface = stateClient.getApiClient()?.create(ApiInterface::class.java)
+//        val apiInterface = stateClient.getApiClient()?.create(ApiInterface::class.java)
 
+        val refresh = view.findViewById<SwipeRefreshLayout>(R.id.state_refresh)
+        val retry = view.findViewById<Button>(R.id.st_retry)
+
+        searchDistrict = view.findViewById(R.id.search_district)
+
+        fetchAllData(view)
+
+        retry.setOnClickListener {
+            InternetCheck{
+                if (it){
+                    st_no_internet.visibility = View.GONE
+                    state.visibility = View.VISIBLE
+                    fetchAllData(view)
+                }else{
+                    Toast.makeText(requireContext(),"No internet", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+        refresh.setOnRefreshListener {
+            InternetCheck{
+                if (it){
+                    st_no_internet.visibility = View.GONE
+                    state.visibility = View.VISIBLE
+                    fetchAllData(view)
+                }else{
+                    state.visibility = View.GONE
+                    st_no_internet.visibility = View.VISIBLE
+                }
+            }
+            refresh.isRefreshing = false
+        }
+//        GlobalScope.launch(Dispatchers.Main){
+//            LoadingUtils.showDialog(requireContext(), true)
+//            response.value = apiInterface?.DistrictResponse()
+//            LoadingUtils.hideDialog()
+//            Log.d("district data", response.value?.body().toString())
+//            setData(view)
+//            state_piechart.clearChart()
+//            setPiechart()
+//        }
+        adapter = DistrictAdapter(list)
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.setHasFixedSize(true)
+
+        search()
+
+        return view
+    }
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    @ExperimentalStdlibApi
+    private fun fetchAllData(view: View){
+        val apiInterface = stateClient.getApiClient()?.create(ApiInterface::class.java)
         GlobalScope.launch(Dispatchers.Main){
             LoadingUtils.showDialog(requireContext(), true)
             response.value = apiInterface?.DistrictResponse()
             LoadingUtils.hideDialog()
             Log.d("district data", response.value?.body().toString())
-            setData()
+            setData(view)
             state_piechart.clearChart()
             setPiechart()
         }
-        adapter = DistrictAdapter(list)
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recyclerView.setHasFixedSize(true)
-        return view
+    }
+
+    private fun search() {
+        searchDistrict.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                if (list.contains(query)) {
+                    (adapter as DistrictAdapter).filter.filter(query)
+                } else {
+                    Toast.makeText(requireContext(), "No Match found", Toast.LENGTH_LONG).show()
+                }
+                return true
+            }
+            override fun onQueryTextChange(newText: String): Boolean {
+                (adapter as DistrictAdapter).filter.filter(newText)
+                return true
+            }
+        })
     }
 
     private fun setPiechart(){
@@ -78,36 +152,46 @@ class StateFragment(private val unit1: Statewise, private  val unit2: Tested) : 
 
     @ExperimentalStdlibApi
     @SuppressLint("SetTextI18n")
-    private fun setData(){
-        st_active_cases.text = unit1.active
-        st_confirmed_cases.text = unit1.confirmed
-        st_delta_confirmed.text = "+" + unit1.deltaconfirmed
-        st_recovered_cases.text = unit1.recovered
-        st_delta_recovered.text = "+" + unit1.deltarecovered
-        st_death_cases.text = unit1.deaths
-        st_delta_deaths.text = "+" + unit1.deltadeaths
-        state_note.text = unit1.statenotes
-        st_update.text = unit1.lastupdatedtime
-        st_tests.text = unit2.totalsamplestested
-        st_delta_tests.text = unit2.totalsamplestested
+    private fun setData(view :  View){
+        val name = view.findViewById<TextView>(R.id.st_name)
+        val active = view.findViewById<TextView>(R.id.st_active_cases)
+        val confirmed = view.findViewById<TextView>(R.id.st_confirmed_cases)
+        val deltaConfirmed = view.findViewById<TextView>(R.id.st_delta_confirmed)
+        val recovered = view.findViewById<TextView>(R.id.st_recovered_cases)
+        val deltaRecovered = view.findViewById<TextView>(R.id.st_delta_recovered)
+        val deaths = view.findViewById<TextView>(R.id.st_death_cases)
+        val deltaDeaths = view.findViewById<TextView>(R.id.st_delta_deaths)
+        val note = view.findViewById<TextView>(R.id.state_note)
+        val update = view.findViewById<TextView>(R.id.st_update)
+        val tests = view.findViewById<TextView>(R.id.st_tests)
+        val deltaTests = view.findViewById<TextView>(R.id.st_delta_tests)
+        val migrated = view.findViewById<TextView>(R.id.st_migrated)
 
-        if(unit1.statenotes == ""){
-            state_note.text = "-----"
-        }else{
-            state_note.text = unit1.statenotes
-        }
+        name.text = unit1.state
+        active.text = unit1.active
+        confirmed.text = unit1.confirmed
+        deltaConfirmed.text = "+" + unit1.deltaconfirmed
+        recovered.text = unit1.recovered
+        deltaRecovered.text = "+" + unit1.deltarecovered
+        deaths.text = unit1.deaths
+        deltaDeaths.text = "+" + unit1.deltadeaths
+        note.text = unit1.statenotes
+        update.text = unit1.lastupdatedtime
+        tests.text = unit2.totalsamplestested
+        deltaTests.text = "+" + unit2.totalsamplestested
+        migrated.text = unit1.migratedother
 
+        
         response.observe(viewLifecycleOwner, { response->
             if (response.code() == 200){
                 for (i in response.body()!!){
 //                    Log.d("district", i.toString())
-                    if(unit1.state.lowercase().equals(i.state.lowercase())){
+                    if(unit1.state.lowercase() == i.state.lowercase()){
                         Log.d("district", i.state)
                         list.addAll(i.districtData)
                         adapter.notifyDataSetChanged()
                     }
                 }
-//                adapter.notifyDataSetChanged()
             }
         })
     }

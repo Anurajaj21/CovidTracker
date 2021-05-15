@@ -1,6 +1,8 @@
 package com.example.covidtracker.Fragments
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.app.Dialog
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -9,34 +11,32 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Adapter
+import android.widget.Button
+import android.widget.SearchView
+import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.AdapterListUpdateCallback
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.example.covidtracker.Adapters.CountriesAdapter
 import com.example.covidtracker.Adapters.StatesAdapter
-import com.example.covidtracker.Models.DataResponse
-import com.example.covidtracker.Models.Statewise
-import com.example.covidtracker.Models.Tested
+import com.example.covidtracker.Models.India.StateResponse
+import com.example.covidtracker.Models.India.Statewise
+import com.example.covidtracker.Models.India.Tested
 import com.example.covidtracker.Network.ApiClient
 import com.example.covidtracker.Network.ApiInterface
 import com.example.covidtracker.R
+import com.example.covidtracker.Utils.InternetCheck
 import com.example.covidtracker.Utils.LoadingUtils
-import kotlinx.android.synthetic.main.fragment_district.*
+import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_india.*
-import kotlinx.android.synthetic.main.fragment_world.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import okhttp3.OkHttpClient
 import org.eazegraph.lib.models.PieModel
-import retrofit2.Call
-import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 
 class IndiaFragment : Fragment() {
@@ -45,7 +45,8 @@ class IndiaFragment : Fragment() {
     var list = ArrayList<Statewise>()
     var tests = ArrayList<Tested>()
     private val indiaClient = ApiClient("https://api.covid19india.org/")
-    private val response: MutableLiveData<Response<DataResponse>> = MutableLiveData()
+    private val response: MutableLiveData<Response<StateResponse>> = MutableLiveData()
+    private lateinit var searchState : SearchView
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreateView(
@@ -55,6 +56,53 @@ class IndiaFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_india, container, false)
         val recyclerView = view.findViewById<RecyclerView>(R.id.states_rv)
 
+        val refresh = view.findViewById<SwipeRefreshLayout>(R.id.india_refresh)
+        val retry = view.findViewById<Button>(R.id.in_retry)
+
+        searchState = view.findViewById(R.id.search_state)
+
+        fetchAllData()
+
+        retry.setOnClickListener {
+            InternetCheck{
+                if (it){
+                    in_no_internet.visibility = View.GONE
+                    india.visibility = View.VISIBLE
+                    fetchAllData()
+                }else{
+                    Toast.makeText(requireContext(),"No internet", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+        refresh.setOnRefreshListener {
+            InternetCheck{
+                if (it){
+                    in_no_internet.visibility = View.GONE
+                    india.visibility = View.VISIBLE
+                    fetchAllData()
+                }else{
+                    india.visibility = View.GONE
+                    in_no_internet.visibility = View.VISIBLE
+                }
+            }
+            refresh.isRefreshing = false
+        }
+
+
+
+        adapter = StatesAdapter(list, tests)
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.setHasFixedSize(true)
+
+        search()
+
+        return view
+    }
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    private fun fetchAllData(){
         val apiInterface = indiaClient.getApiClient()?.create(ApiInterface::class.java)
         Log.d("indiaa", apiInterface.toString())
 
@@ -62,15 +110,26 @@ class IndiaFragment : Fragment() {
             LoadingUtils.showDialog(requireContext(), true)
             response.value = apiInterface?.StateResponse()
             LoadingUtils.hideDialog()
+
+            fetchData()
         }
+    }
 
-        fetchData()
-
-        adapter = StatesAdapter(list, tests)
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recyclerView.setHasFixedSize(true)
-        return view
+    private fun search() {
+        searchState.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                if (list.contains(query)) {
+                    (adapter as StatesAdapter).filter.filter(query)
+                } else {
+                    Toast.makeText(requireContext(), "No Match found", Toast.LENGTH_LONG).show()
+                }
+                return true
+            }
+            override fun onQueryTextChange(newText: String): Boolean {
+                (adapter as StatesAdapter).filter.filter(newText)
+                return true
+            }
+        })
     }
 
 
@@ -100,7 +159,7 @@ class IndiaFragment : Fragment() {
                 india_note.text = ind.statenotes
                 in_update.text = ind.lastupdatedtime
                 in_tests.text = ind_test.totalsamplestested
-                in_delta_tests.text = ind_test.totalsamplestested
+                in_delta_tests.text = "+" + ind_test.totalsamplestested
                 in_migrated.text = ind.migratedother
                 if(ind.statenotes == ""){
                     india_note.text = "-----"

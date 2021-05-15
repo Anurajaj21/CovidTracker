@@ -1,4 +1,4 @@
-package com.example.covidtracker.Models
+package com.example.covidtracker.Models.World
 
 data class CountryInfo(
     val _id: Int,

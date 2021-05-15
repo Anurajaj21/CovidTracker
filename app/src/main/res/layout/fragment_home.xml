@@ -1,476 +1,524 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_refesh"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.HomeFragment">
 
-    <LinearLayout
-        android:id="@+id/location"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@drawable/gradient3"
-        android:orientation="horizontal"
-        android:layout_marginBottom="2dp"
-        android:padding="4dp">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/in_name"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:fontFamily="@font/roboto"
-            android:layout_marginLeft="4dp"
-            android:padding="2dp"
-            android:text="District Name"
-            android:gravity="center"
-            android:textColor="@color/dark_green"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-    </LinearLayout>
-<!--    <androidx.appcompat.widget.Toolbar-->
-<!--        android:id="@+id/location"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:background="@drawable/gradient3"-->
-<!--        android:layout_marginBottom="2dp"-->
-<!--        app:title="District name"-->
-<!--        app:titleTextColor="@color/dark_green" />-->
-
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/location">
-
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ho_no_internet"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="300dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/district_graph"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        app:cardBackgroundColor="@color/orange"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="4dp"
-        android:layout_below="@+id/location"
-        android:layout_marginTop="2dp"
-        android:layout_marginBottom="4dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="4dp">
-        <LinearLayout
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/anim"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/internet" />
+
+            <Button
+                android:id="@+id/ho_retry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="@color/dark_gray"
+                android:text="Retry"
+                app:layout_constraintBottom_toBottomOf="@+id/anim"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <RelativeLayout
+            android:id="@+id/home"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:padding="4dp"
-            android:weightSum="2"
-            android:background="@drawable/gradient2">
-
-            <org.eazegraph.lib.charts.PieChart
-                android:id="@+id/state_piechart"
-                android:layout_height="match_parent"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                app:egDrawValueInPie="true"
-                app:egLegendHeight="0dp"
-                app:egInnerPaddingColor="@color/cardview_shadow_start_color"
-                app:egValueTextSize="0dp"
-                android:padding="10dp"/>
+            android:layout_height="match_parent">
 
             <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center_vertical"
-                android:padding="8dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="20dp"
-                    android:layout_marginBottom="4dp"
-                    android:orientation="horizontal"
-                    android:paddingLeft="20dp">
-                    <View
-                        android:layout_width="18dp"
-                        android:layout_height="match_parent"
-                        android:backgroundTint="@color/brown"
-                        android:background="@drawable/round_bg"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto"
-                        android:paddingStart="10dp"
-                        android:paddingLeft="10dp"
-                        android:text="Active Cases" />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="20dp"
-                    android:layout_marginBottom="4dp"
-                    android:orientation="horizontal"
-                    android:paddingLeft="20dp">
-                    <View
-                        android:layout_width="18dp"
-                        android:layout_height="match_parent"
-                        android:backgroundTint="@color/blue"
-                        android:background="@drawable/round_bg"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto"
-                        android:paddingStart="10dp"
-                        android:paddingLeft="10dp"
-                        android:text="Confirmed Cases" />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="20dp"
-                    android:layout_marginBottom="4dp"
-                    android:orientation="horizontal"
-                    android:paddingLeft="20dp">
-                    <View
-                        android:layout_width="18dp"
-                        android:layout_height="match_parent"
-                        android:backgroundTint="@color/green"
-                        android:background="@drawable/round_bg"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto"
-                        android:paddingStart="10dp"
-                        android:paddingLeft="10dp"
-                        android:text="Recovered Cases" />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="20dp"
-                    android:layout_marginBottom="4dp"
-                    android:orientation="horizontal"
-                    android:paddingLeft="20dp">
-                    <View
-                        android:layout_width="18dp"
-                        android:layout_height="match_parent"
-                        android:backgroundTint="@color/red"
-                        android:background="@drawable/round_bg"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto"
-                        android:paddingStart="10dp"
-                        android:paddingLeft="10dp"
-                        android:text="Deaths" />
-                </LinearLayout>
-            </LinearLayout>
-
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
-
-            <LinearLayout
+                android:id="@+id/location"
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="2dp"
+                android:background="@drawable/gradient3"
                 android:orientation="horizontal"
-                android:weightSum="2">
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="0dp"
+                android:padding="4dp">
+
+                <TextView
+                    android:id="@+id/ho_name"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_weight="1">
+                    android:layout_marginLeft="6dp"
+                    android:fontFamily="@font/roboto"
+                    android:gravity="center"
+                    android:padding="2dp"
+                    android:text="District Name"
+                    android:textColor="@color/dark_green"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
-                    <LinearLayout
-                        android:id="@+id/active"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginLeft="4dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="2dp"
-                        android:layout_marginRight="2dp"
-                        android:gravity="center_horizontal"
-                        android:background="@drawable/gradient2"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:orientation="vertical" >
-
-                        <TextView
-                            android:id="@+id/st_active_cases"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="325356"
-                            android:textColor="@color/brown"
-                            android:layout_marginTop="24dp"
-                            android:layout_marginBottom="2dp"
-                            android:textSize="24sp"
-                            android:fontFamily="@font/roboto"/>
-
-                        <TextView
-                            android:id="@+id/st_delta_actcive"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="+4678"
-                            android:fontFamily="@font/roboto"
-                            android:layout_marginTop="4dp"
-                            android:textSize="16sp"/>
-
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto"
-                        android:gravity="center"
-                        android:padding="10dp"
-                        android:text="Active"
-                        android:textAllCaps="false"
-                        android:textColor="@color/dark_green"
-                        android:textSize="20dp"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toTopOf="@+id/active"
-                        app:layout_constraintTop_toTopOf="@+id/active"
-                        tools:ignore="MissingConstraints" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
-
-                    <LinearLayout
-                        android:id="@+id/confirmed"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="2dp"
-                        android:layout_marginLeft="2dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="4dp"
-                        android:layout_marginRight="4dp"
-                        android:gravity="center_horizontal"
-                        android:background="@drawable/gradient2"
-                        android:orientation="vertical"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" >
-
-                        <TextView
-                            android:id="@+id/st_confirmed_cases"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="325356"
-                            android:textColor="@color/blue"
-                            android:layout_marginTop="24dp"
-                            android:layout_marginBottom="2dp"
-                            android:textSize="24sp"
-                            android:fontFamily="@font/roboto"/>
-
-                        <TextView
-                            android:id="@+id/st_delta_confirmed"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="+4678"
-                            android:fontFamily="@font/roboto"
-                            android:layout_marginTop="4dp"
-                            android:textSize="16sp"/>
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto"
-                        android:gravity="center"
-                        android:padding="10dp"
-                        android:text="Confirmed"
-                        android:textColor="@color/dark_green"
-                        android:textSize="20dp"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toTopOf="@+id/confirmed"
-                        app:layout_constraintTop_toTopOf="@+id/confirmed"
-                        tools:ignore="MissingConstraints" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
+            <!--    <androidx.appcompat.widget.Toolbar-->
+            <!--        android:id="@+id/location"-->
+            <!--        android:layout_width="match_parent"-->
+            <!--        android:layout_height="wrap_content"-->
+            <!--        android:background="@drawable/gradient3"-->
+            <!--        android:layout_marginBottom="2dp"-->
+            <!--        app:title="District name"-->
+            <!--        app:titleTextColor="@color/dark_green" />-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:orientation="horizontal"
-                android:weightSum="2">
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
-
-                    <LinearLayout
-                        android:id="@+id/recovered"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginLeft="4dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="2dp"
-                        android:layout_marginRight="2dp"
-                        android:gravity="center_horizontal"
-                        android:background="@drawable/gradient2"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:orientation="vertical" >
-
-                        <TextView
-                            android:id="@+id/st_recovered_cases"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="325356"
-                            android:textColor="@color/green"
-                            android:layout_marginTop="24dp"
-                            android:layout_marginBottom="2dp"
-                            android:textSize="24sp"
-                            android:fontFamily="@font/roboto"/>
-
-                        <TextView
-                            android:id="@+id/st_delta_recovered"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="+4678"
-                            android:fontFamily="@font/roboto"
-                            android:layout_marginTop="4dp"
-                            android:textSize="16sp"/>
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto"
-                        android:gravity="center"
-                        android:padding="10dp"
-                        android:text="Recovered"
-                        android:textColor="@color/dark_green"
-                        android:textSize="20dp"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toTopOf="@+id/recovered"
-                        app:layout_constraintTop_toTopOf="@+id/recovered"
-                        tools:ignore="MissingConstraints" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
-
-                    <LinearLayout
-                        android:id="@+id/deaths"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="2dp"
-                        android:layout_marginLeft="2dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="4dp"
-                        android:layout_marginRight="4dp"
-                        android:gravity="center_horizontal"
-                        android:background="@drawable/gradient2"
-                        android:orientation="vertical"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" >
-
-                        <TextView
-                            android:id="@+id/st_death_cases"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="325356"
-                            android:textColor="@color/red"
-                            android:layout_marginTop="24dp"
-                            android:layout_marginBottom="2dp"
-                            android:textSize="24sp"
-                            android:fontFamily="@font/roboto"/>
-
-                        <TextView
-                            android:id="@+id/st_delta_deaths"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="+4678"
-                            android:fontFamily="@font/roboto"
-                            android:layout_marginTop="4dp"
-                            android:textSize="16sp"/>
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto"
-                        android:gravity="center"
-                        android:padding="10dp"
-                        android:text="Deaths"
-                        android:textColor="@color/dark_green"
-                        android:textSize="20dp"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toTopOf="@+id/deaths"
-                        app:layout_constraintTop_toTopOf="@+id/deaths"
-                        tools:ignore="MissingConstraints" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </LinearLayout>
-
-            <LinearLayout
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="45dp"
-                    android:layout_height="wrap_content"
-                    android:text="Note: "
-                    android:textColor="@color/red"
-                    android:fontFamily="@font/roboto"/>
-                <TextView
-                    android:id="@+id/district_note"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="here is some important informaion."
-                    android:fontFamily="@font/roboto"/>
-
-            </LinearLayout>
+                android:layout_below="@+id/location">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:background="@drawable/gradient4"
-                    android:weightSum="2"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-                    <com.airbnb.lottie.LottieAnimationView
-                        android:id="@+id/lottieAnimationView"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginLeft="10dp"
-                        app:lottie_rawRes="@raw/stay_home_anim"
-                        app:lottie_autoPlay="true"
-                        app:lottie_loop="true"
-                        android:scaleType="fitCenter"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/aref_ruqaa_bold"
-                        android:gravity="center_vertical"
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/district_graph"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_below="@+id/location"
                         android:layout_marginStart="4dp"
-                        android:text="All you\nhave to do\nJust Stay Home"
-                        android:textColor="@color/white"
-                        android:textSize="20dp" />
+                        android:layout_marginTop="2dp"
+                        android:layout_marginEnd="4dp"
+                        android:layout_marginBottom="4dp"
+                        app:cardBackgroundColor="@color/orange"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="4dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/gradient2"
+                            android:orientation="horizontal"
+                            android:padding="4dp"
+                            android:weightSum="2">
+
+                            <org.eazegraph.lib.charts.PieChart
+                                android:id="@+id/ho_state_piechart"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:padding="10dp"
+                                app:egDrawValueInPie="true"
+                                app:egInnerPaddingColor="@color/cardview_shadow_start_color"
+                                app:egLegendHeight="0dp"
+                                app:egValueTextSize="0dp" />
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:orientation="vertical"
+                                android:padding="8dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="4dp"
+                                    android:orientation="horizontal"
+                                    android:paddingStart="20dp"
+                                    android:paddingLeft="20dp">
+
+                                    <View
+                                        android:layout_width="18dp"
+                                        android:layout_height="match_parent"
+                                        android:background="@drawable/round_bg"
+                                        android:backgroundTint="@color/brown" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/roboto"
+                                        android:paddingStart="10dp"
+                                        android:paddingLeft="10dp"
+                                        android:text="Active Cases" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="4dp"
+                                    android:orientation="horizontal"
+                                    android:paddingStart="20dp"
+                                    android:paddingLeft="20dp">
+
+                                    <View
+                                        android:layout_width="18dp"
+                                        android:layout_height="match_parent"
+                                        android:background="@drawable/round_bg"
+                                        android:backgroundTint="@color/blue" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/roboto"
+                                        android:paddingStart="10dp"
+                                        android:paddingLeft="10dp"
+                                        android:text="Confirmed Cases" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="4dp"
+                                    android:orientation="horizontal"
+                                    android:paddingStart="20dp"
+                                    android:paddingLeft="20dp">
+
+                                    <View
+                                        android:layout_width="18dp"
+                                        android:layout_height="match_parent"
+                                        android:background="@drawable/round_bg"
+                                        android:backgroundTint="@color/green" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/roboto"
+                                        android:paddingStart="10dp"
+                                        android:paddingLeft="10dp"
+                                        android:text="Recovered Cases" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="4dp"
+                                    android:orientation="horizontal"
+                                    android:paddingStart="20dp"
+                                    android:paddingLeft="20dp">
+
+                                    <View
+                                        android:layout_width="18dp"
+                                        android:layout_height="match_parent"
+                                        android:background="@drawable/round_bg"
+                                        android:backgroundTint="@color/red" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/roboto"
+                                        android:paddingStart="10dp"
+                                        android:paddingLeft="10dp"
+                                        android:text="Deaths" />
+                                </LinearLayout>
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="120dp"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <LinearLayout
+                                android:id="@+id/active"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="4dp"
+                                android:layout_marginLeft="4dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginEnd="2dp"
+                                android:layout_marginRight="2dp"
+                                android:background="@drawable/gradient2"
+                                android:gravity="center_horizontal"
+                                android:orientation="vertical"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <TextView
+                                    android:id="@+id/ho_active_cases"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="24dp"
+                                    android:layout_marginBottom="2dp"
+                                    android:fontFamily="@font/roboto"
+                                    android:text="325356"
+                                    android:textColor="@color/brown"
+                                    android:textSize="24sp" />
+
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto"
+                                android:gravity="center"
+                                android:padding="10dp"
+                                android:text="Active"
+                                android:textAllCaps="false"
+                                android:textColor="@color/dark_green"
+                                android:textSize="20dp"
+                                android:textStyle="bold"
+                                app:layout_constraintBottom_toTopOf="@+id/active"
+                                app:layout_constraintTop_toTopOf="@+id/active"
+                                tools:ignore="MissingConstraints" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <LinearLayout
+                                android:id="@+id/confirmed"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="2dp"
+                                android:layout_marginLeft="2dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginEnd="4dp"
+                                android:layout_marginRight="4dp"
+                                android:background="@drawable/gradient2"
+                                android:gravity="center_horizontal"
+                                android:orientation="vertical"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <TextView
+                                    android:id="@+id/ho_confirmed_cases"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="24dp"
+                                    android:layout_marginBottom="2dp"
+                                    android:fontFamily="@font/roboto"
+                                    android:textColor="@color/blue"
+                                    android:textSize="24sp"
+                                    tools:text="325356" />
+
+                                <TextView
+                                    android:id="@+id/ho_delta_confirmed"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="4dp"
+                                    android:fontFamily="@font/roboto"
+                                    android:textSize="16sp"
+                                    tools:text="+4678" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto"
+                                android:gravity="center"
+                                android:padding="10dp"
+                                android:text="Confirmed"
+                                android:textColor="@color/dark_green"
+                                android:textSize="20dp"
+                                android:textStyle="bold"
+                                app:layout_constraintBottom_toTopOf="@+id/confirmed"
+                                app:layout_constraintTop_toTopOf="@+id/confirmed"
+                                tools:ignore="MissingConstraints" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="120dp"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <LinearLayout
+                                android:id="@+id/recovered"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="4dp"
+                                android:layout_marginLeft="4dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginEnd="2dp"
+                                android:layout_marginRight="2dp"
+                                android:background="@drawable/gradient2"
+                                android:gravity="center_horizontal"
+                                android:orientation="vertical"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <TextView
+                                    android:id="@+id/ho_recovered_cases"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="24dp"
+                                    android:layout_marginBottom="2dp"
+                                    android:fontFamily="@font/roboto"
+                                    android:textColor="@color/green"
+                                    android:textSize="24sp"
+                                    tools:text="325356" />
+
+                                <TextView
+                                    android:id="@+id/ho_delta_recovered"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="4dp"
+                                    android:fontFamily="@font/roboto"
+                                    android:textSize="16sp"
+                                    tools:text="+4678" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto"
+                                android:gravity="center"
+                                android:padding="10dp"
+                                android:text="Recovered"
+                                android:textColor="@color/dark_green"
+                                android:textSize="20dp"
+                                android:textStyle="bold"
+                                app:layout_constraintBottom_toTopOf="@+id/recovered"
+                                app:layout_constraintTop_toTopOf="@+id/recovered"
+                                tools:ignore="MissingConstraints" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <LinearLayout
+                                android:id="@+id/deaths"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="2dp"
+                                android:layout_marginLeft="2dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginEnd="4dp"
+                                android:layout_marginRight="4dp"
+                                android:background="@drawable/gradient2"
+                                android:gravity="center_horizontal"
+                                android:orientation="vertical"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <TextView
+                                    android:id="@+id/ho_death_cases"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="24dp"
+                                    android:layout_marginBottom="2dp"
+                                    android:fontFamily="@font/roboto"
+                                    android:textColor="@color/red"
+                                    android:textSize="24sp"
+                                    tools:text="325356" />
+
+                                <TextView
+                                    android:id="@+id/ho_delta_deaths"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="4dp"
+                                    android:fontFamily="@font/roboto"
+                                    android:textSize="16sp"
+                                    tools:text="+4678" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto"
+                                android:gravity="center"
+                                android:padding="10dp"
+                                android:text="Deaths"
+                                android:textColor="@color/dark_green"
+                                android:textSize="20dp"
+                                android:textStyle="bold"
+                                app:layout_constraintBottom_toTopOf="@+id/deaths"
+                                app:layout_constraintTop_toTopOf="@+id/deaths"
+                                tools:ignore="MissingConstraints" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="45dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto"
+                            android:text="Note: "
+                            android:textColor="@color/red" />
+
+                        <TextView
+                            android:id="@+id/ho_district_note"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto"
+                            tools:text="here is some important informaion." />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/gradient4"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <com.airbnb.lottie.LottieAnimationView
+                            android:id="@+id/lottieAnimationView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_weight="1"
+                            android:scaleType="fitCenter"
+                            app:lottie_autoPlay="true"
+                            app:lottie_loop="true"
+                            app:lottie_rawRes="@raw/stay_home_anim" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="4dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/aref_ruqaa_bold"
+                            android:gravity="center_vertical"
+                            android:text="All you\nhave to do\nJust Stay Home"
+                            android:textColor="@color/white"
+                            android:textSize="20dp" />
+
+                    </LinearLayout>
+
 
                 </LinearLayout>
-
-
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
-</RelativeLayout>
+            </androidx.core.widget.NestedScrollView>
+        </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

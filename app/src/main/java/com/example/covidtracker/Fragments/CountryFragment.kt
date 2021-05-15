@@ -9,7 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
-import com.example.covidtracker.Models.countryDataItem
+import com.example.covidtracker.Models.World.countryDataItem
 import com.example.covidtracker.R
 import kotlinx.android.synthetic.main.each_country.view.*
 import kotlinx.android.synthetic.main.fragment_country.*

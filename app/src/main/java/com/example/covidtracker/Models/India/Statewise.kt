@@ -1,4 +1,4 @@
-package com.example.covidtracker.Models
+package com.example.covidtracker.Models.India
 
 data class Statewise(
         var active: String,

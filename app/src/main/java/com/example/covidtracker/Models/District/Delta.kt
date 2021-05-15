@@ -1,4 +1,4 @@
-package com.example.covidtracker.Models
+package com.example.covidtracker.Models.District
 
 data class Delta(
     val confirmed: Int,

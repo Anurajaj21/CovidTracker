@@ -9,26 +9,29 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.SearchView
+import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.core.view.contains
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.covidtracker.Activities.MainActivity
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.covidtracker.Adapters.CountriesAdapter
-import com.example.covidtracker.Models.countryData
-import com.example.covidtracker.Models.countryDataItem
-import com.example.covidtracker.Models.worldData
+import com.example.covidtracker.Models.World.countryData
+import com.example.covidtracker.Models.World.countryDataItem
+import com.example.covidtracker.Models.World.worldData
 import com.example.covidtracker.Network.ApiClient
 import com.example.covidtracker.Network.ApiInterface
 import com.example.covidtracker.R
-import com.example.covidtracker.Utils.CustomLoader
+import com.example.covidtracker.Utils.InternetCheck
 import com.example.covidtracker.Utils.LoadingUtils
+import kotlinx.android.synthetic.main.fragment_india.*
 import kotlinx.android.synthetic.main.fragment_world.*
 import kotlinx.coroutines.*
 import org.eazegraph.lib.models.PieModel
 import retrofit2.*
+import java.util.Locale.filter
 
 class WorldFragment : Fragment() {
 
@@ -37,6 +40,7 @@ class WorldFragment : Fragment() {
     private val WorldClient = ApiClient("https://corona.lmao.ninja/v2/")
     private val worldResponse: MutableLiveData<Response<worldData>> = MutableLiveData()
     private val countryResponse: MutableLiveData<Response<countryData>> = MutableLiveData()
+    private lateinit var searchCountry : SearchView
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreateView(
@@ -47,6 +51,51 @@ class WorldFragment : Fragment() {
         val view =  inflater.inflate(R.layout.fragment_world, container, false)
         val recyclerView = view.findViewById<RecyclerView>(R.id.country_rv)
 
+        val refresh = view.findViewById<SwipeRefreshLayout>(R.id.wo_refresh)
+        val retry = view.findViewById<Button>(R.id.wo_retry)
+
+        searchCountry = view.findViewById(R.id.search_country)
+
+        fetchAllData()
+
+        retry.setOnClickListener {
+            InternetCheck{
+                if (it){
+                    wo_no_internet.visibility = View.GONE
+                    world_frg.visibility = View.VISIBLE
+                    fetchAllData()
+                }else{
+                    Toast.makeText(requireContext(),"No internet", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+        refresh.setOnRefreshListener {
+            InternetCheck{
+                if (it){
+                    wo_no_internet.visibility = View.GONE
+                    world_frg.visibility = View.VISIBLE
+                    fetchAllData()
+                }else{
+                    world_frg.visibility = View.GONE
+                    wo_no_internet.visibility = View.VISIBLE
+                }
+            }
+            refresh.isRefreshing = false
+        }
+
+        adapter = CountriesAdapter(list)
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.setHasFixedSize(true)
+
+        search()
+
+        return view
+    }
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    private fun fetchAllData(){
         val apiInterface = WorldClient.getApiClient()?.create(ApiInterface::class.java)
 
         GlobalScope.launch(Dispatchers.Main) {
@@ -57,14 +106,25 @@ class WorldFragment : Fragment() {
 
             Log.i("world", worldResponse.value.toString())
 
+            fetchData()
         }
-        fetchData()
+    }
 
-        adapter = CountriesAdapter(list)
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recyclerView.setHasFixedSize(true)
-        return view
+    private fun search() {
+        searchCountry.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                if (list.contains(query)) {
+                    (adapter as CountriesAdapter).filter.filter(query)
+                } else {
+                    Toast.makeText(requireContext(), "No Match found", Toast.LENGTH_LONG).show()
+                }
+                return true
+            }
+            override fun onQueryTextChange(newText: String): Boolean {
+                (adapter as CountriesAdapter).filter.filter(newText)
+                return true
+            }
+        })
     }
 
     @SuppressLint("SetTextI18n")
@@ -107,24 +167,6 @@ class WorldFragment : Fragment() {
         countryResponse.observe(viewLifecycleOwner, {
             if (it.code() == 200) {
                 list.addAll(it.body()!!)
-//                for (i in it.body()!!) {
-//                    list.add(countryDataItem(
-//                            i.active,
-//                            i.cases,
-//                            i.country,
-//                            i.countryInfo,
-//                            i.critical,
-//                            i.deaths,
-//                            i.recovered,
-//                            i.tests,
-//                            i.todayCases,
-//                            i.todayDeaths,
-//                            i.todayRecovered,
-//                            i.updated
-//                    ))
-//                    Log.d("country data", "fetch")
-//                    adapter.notifyDataSetChanged()
-//                }
                 Log.d("country data", "fetch")
                 adapter.notifyDataSetChanged()
             }

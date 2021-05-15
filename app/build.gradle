@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.covidtracker"
-        minSdkVersion 16
+        minSdkVersion 17
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -90,4 +90,9 @@ dependencies {
     implementation 'com.faltenreich:skeletonlayout:1.0.0'
 
     implementation 'com.android.support:multidex:1.0.3'
+
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
+
+    // gif imageview
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.17'
 }
