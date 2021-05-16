@@ -13,10 +13,10 @@ import com.example.covidtracker.Models.World.countryDataItem
 import com.example.covidtracker.R
 import kotlinx.android.synthetic.main.each_state.view.*
 
-class DistrictAdapter(val list : ArrayList<DistrictData>): RecyclerView.Adapter<DistrictAdapter.DistrictViewHolder>(), Filterable {
+class DistrictAdapter(var list : ArrayList<DistrictData>): RecyclerView.Adapter<DistrictAdapter.DistrictViewHolder>(), Filterable {
 
     private val filterList = list
-    private var usedList = list
+//    private var usedList = list
 
     class DistrictViewHolder(val view: View) : RecyclerView.ViewHolder(view)
 
@@ -27,9 +27,9 @@ class DistrictAdapter(val list : ArrayList<DistrictData>): RecyclerView.Adapter<
     }
 
     override fun onBindViewHolder(holder: DistrictViewHolder, position: Int) {
-        holder.view.name.text = usedList[position].district
-        holder.view.cases.text = usedList[position].confirmed.toString()
-        val unit = usedList[position]
+        holder.view.name.text = list[position].district
+        holder.view.cases.text = list[position].confirmed.toString()
+        val unit = list[position]
 
         holder.view.open_info.setOnClickListener {
             val activity = it.context as AppCompatActivity
@@ -41,7 +41,7 @@ class DistrictAdapter(val list : ArrayList<DistrictData>): RecyclerView.Adapter<
         }
     }
 
-    override fun getItemCount() = usedList.size
+    override fun getItemCount() = list.size
     @ExperimentalStdlibApi
     override fun getFilter(): Filter {
         return object : Filter(){
@@ -68,7 +68,7 @@ class DistrictAdapter(val list : ArrayList<DistrictData>): RecyclerView.Adapter<
             }
 
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                usedList = results?.values as ArrayList<DistrictData>
+                list = results?.values as ArrayList<DistrictData>
                 notifyDataSetChanged()
             }
 

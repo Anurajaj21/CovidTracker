@@ -30,6 +30,7 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
+import kotlinx.android.synthetic.main.fragment_india.*
 import kotlinx.android.synthetic.main.fragment_state.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -165,10 +166,15 @@ class HomeFragment : Fragment() {
                                 ho_confirmed_cases.text = j.confirmed.toString()
                                 ho_delta_confirmed.text = "+" + j.delta.confirmed
                                 ho_recovered_cases.text = j.recovered.toString()
-                                ho_delta_recovered.text = "=" + j.delta.recovered
+                                ho_delta_recovered.text = "+" + j.delta.recovered
                                 ho_death_cases.text = j.deceased.toString()
                                 ho_delta_deaths.text = "+" + j.delta.deceased
-                                ho_district_note.text = j.notes
+
+                                if(j.notes == ""){
+                                    ho_district_note.text = "- - - - - - - - - - -"
+                                }else{
+                                    ho_district_note.text = j.notes
+                                }
                             }
                         }
                     }

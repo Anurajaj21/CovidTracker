@@ -9,10 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.SearchView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -29,6 +26,7 @@ import com.example.covidtracker.Network.ApiInterface
 import com.example.covidtracker.R
 import com.example.covidtracker.Utils.InternetCheck
 import com.example.covidtracker.Utils.LoadingUtils
+import kotlinx.android.synthetic.main.fragment_country.*
 import kotlinx.android.synthetic.main.fragment_india.*
 import kotlinx.android.synthetic.main.fragment_state.*
 import kotlinx.coroutines.Dispatchers
@@ -56,8 +54,13 @@ class StateFragment(private val unit1: Statewise, private  val unit2: Tested) : 
         val view =  inflater.inflate(R.layout.fragment_state, container, false)
         val recyclerView = view.findViewById<RecyclerView>(R.id.district_rv)
 
+        val back = view.findViewById<ImageView>(R.id.st_back)
         val refresh = view.findViewById<SwipeRefreshLayout>(R.id.state_refresh)
         val retry = view.findViewById<Button>(R.id.st_retry)
+
+        back.setOnClickListener {
+            activity?.onBackPressed()
+        }
 
         searchDistrict = view.findViewById(R.id.search_district)
 
@@ -142,7 +145,7 @@ class StateFragment(private val unit1: Statewise, private  val unit2: Tested) : 
     }
 
     @ExperimentalStdlibApi
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "FragmentLiveDataObserve")
     private fun setData(view :  View){
         val name = view.findViewById<TextView>(R.id.st_name)
         val active = view.findViewById<TextView>(R.id.st_active_cases)
@@ -166,14 +169,19 @@ class StateFragment(private val unit1: Statewise, private  val unit2: Tested) : 
         deltaRecovered.text = "+" + unit1.deltarecovered
         deaths.text = unit1.deaths
         deltaDeaths.text = "+" + unit1.deltadeaths
-        note.text = unit1.statenotes
         update.text = unit1.lastupdatedtime
         tests.text = unit2.totalsamplestested
         deltaTests.text = "+" + unit2.totalsamplestested
         migrated.text = unit1.migratedother
 
+        if(unit1.statenotes == ""){
+            note.text = "- - - - - - - - - - -"
+        }else{
+            note.text = unit1.statenotes
+        }
+
         
-        response.observe(viewLifecycleOwner, { response->
+        response.observe(this, { response->
             if (response.code() == 200){
                 for (i in response.body()!!){
 //                    Log.d("district", i.toString())

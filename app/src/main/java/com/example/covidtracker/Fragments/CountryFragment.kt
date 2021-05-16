@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bumptech.glide.Glide
@@ -33,9 +34,13 @@ class CountryFragment(private val unit: countryDataItem) : Fragment() {
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_country, container, false)
 
+        val back = view.findViewById<ImageView>(R.id.ct_back)
         val refresh = view.findViewById<SwipeRefreshLayout>(R.id.country_refresh)
         val retry = view.findViewById<Button>(R.id.ct_retry)
 
+        back.setOnClickListener {
+            activity?.onBackPressed()
+        }
         fetchAllData()
 
         retry.setOnClickListener {

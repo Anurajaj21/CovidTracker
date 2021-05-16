@@ -558,12 +558,13 @@
             android:text="Note: "
             android:textColor="@color/red"
             android:fontFamily="@font/roboto"/>
+
         <TextView
             android:id="@+id/india_note"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="-----"
-            android:fontFamily="@font/roboto"/>
+            android:fontFamily="@font/roboto"
+            android:text="-----" />
 
     </LinearLayout>
 

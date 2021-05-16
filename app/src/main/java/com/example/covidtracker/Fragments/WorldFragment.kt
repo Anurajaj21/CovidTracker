@@ -27,12 +27,10 @@ import com.example.covidtracker.Network.ApiInterface
 import com.example.covidtracker.R
 import com.example.covidtracker.Utils.InternetCheck
 import com.example.covidtracker.Utils.LoadingUtils
-import kotlinx.android.synthetic.main.fragment_india.*
 import kotlinx.android.synthetic.main.fragment_world.*
 import kotlinx.coroutines.*
 import org.eazegraph.lib.models.PieModel
 import retrofit2.*
-import java.util.Locale.filter
 
 class WorldFragment : Fragment() {
 
@@ -41,15 +39,15 @@ class WorldFragment : Fragment() {
     private val WorldClient = ApiClient("https://corona.lmao.ninja/v2/")
     private val worldResponse: MutableLiveData<Response<worldData>> = MutableLiveData()
     private val countryResponse: MutableLiveData<Response<countryData>> = MutableLiveData()
-    private lateinit var searchCountry : SearchView
+    private lateinit var searchCountry: SearchView
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
 
-        val view =  inflater.inflate(R.layout.fragment_world, container, false)
+        val view = inflater.inflate(R.layout.fragment_world, container, false)
         val recyclerView = view.findViewById<RecyclerView>(R.id.country_rv)
 
         val refresh = view.findViewById<SwipeRefreshLayout>(R.id.wo_refresh)
@@ -60,24 +58,24 @@ class WorldFragment : Fragment() {
         fetchAllData()
 
         retry.setOnClickListener {
-            InternetCheck{
-                if (it){
+            InternetCheck {
+                if (it) {
                     wo_no_internet.visibility = View.GONE
                     world_frg.visibility = View.VISIBLE
                     fetchAllData()
-                }else{
-                    Toast.makeText(requireContext(),"No internet", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(requireContext(), "No internet", Toast.LENGTH_SHORT).show()
                 }
             }
         }
 
         refresh.setOnRefreshListener {
-            InternetCheck{
-                if (it){
+            InternetCheck {
+                if (it) {
                     wo_no_internet.visibility = View.GONE
                     world_frg.visibility = View.VISIBLE
                     fetchAllData()
-                }else{
+                } else {
                     world_frg.visibility = View.GONE
                     wo_no_internet.visibility = View.VISIBLE
                 }
@@ -96,7 +94,7 @@ class WorldFragment : Fragment() {
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
-    private fun fetchAllData(){
+    private fun fetchAllData() {
         val apiInterface = WorldClient.getApiClient()?.create(ApiInterface::class.java)
 
         GlobalScope.launch(Dispatchers.Main) {
@@ -107,8 +105,8 @@ class WorldFragment : Fragment() {
 
             Log.i("world", worldResponse.value.toString())
 
-            fetchData()
         }
+        fetchData()
     }
 
     private fun search() {
@@ -121,6 +119,7 @@ class WorldFragment : Fragment() {
                 }
                 return true
             }
+
             override fun onQueryTextChange(newText: String): Boolean {
                 (adapter as CountriesAdapter).filter.filter(newText)
                 return true
@@ -128,11 +127,11 @@ class WorldFragment : Fragment() {
         })
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "FragmentLiveDataObserve")
     @RequiresApi(Build.VERSION_CODES.N)
     private fun fetchData() {
 
-        worldResponse.observe(viewLifecycleOwner, { response->
+        worldResponse.observe(this, { response ->
             if (response.code() == 200) {
                 val stcases: Int? = response.body()?.cases
                 val sttodaycases: Int? = response.body()?.todayCases
@@ -165,9 +164,9 @@ class WorldFragment : Fragment() {
         })
 
 
-        countryResponse.observe(viewLifecycleOwner, {
+        countryResponse.observe(this, {
             if (it.code() == 200) {
-                list.addAll(it.body()!!)
+                list.addAll(it.body() as ArrayList<countryDataItem>)
                 Log.d("country data", "fetch")
                 adapter.notifyDataSetChanged()
             }
@@ -176,7 +175,7 @@ class WorldFragment : Fragment() {
 
     }
 
-    private fun setPiechart(){
+    private fun setPiechart() {
         world_piechart.addPieSlice(PieModel("Active", Integer.parseInt(wo_active_cases.text.toString()).toFloat(), Color.parseColor("#85601F")))
         world_piechart.addPieSlice(PieModel("Confirmed", Integer.parseInt(wo_confirmed_cases.text.toString()).toFloat(), Color.parseColor("#6568EE")))
         world_piechart.addPieSlice(PieModel("Recovered", Integer.parseInt(wo_recovered_cases.text.toString()).toFloat(), Color.parseColor("#50A754")))

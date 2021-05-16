@@ -18,15 +18,15 @@ class MainActivity : AppCompatActivity() {
 
 
         fragmentManager.beginTransaction().replace(R.id.fragment_container, HomeFragment()).commit()
-        bottom_nav.setOnNavigationItemSelectedListener { item->
-            when(item.itemId){
+        bottom_nav.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
                 R.id.home -> {
                     changeFragment(HomeFragment())
                     true
                 }
                 R.id.india -> {
                     changeFragment(IndiaFragment())
-                    true
+                   true
                 }
                 R.id.world -> {
                     changeFragment(WorldFragment())
@@ -38,13 +38,12 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun changeFragment(dest : Fragment) {
+    private fun changeFragment(dest: Fragment) {
         val fragmentTransition = fragmentManager.beginTransaction()
         fragmentTransition.setCustomAnimations(R.anim.slide_left_anim, R.anim.fade_out)
         fragmentTransition.replace(R.id.fragment_container, dest)
         fragmentTransition.setReorderingAllowed(true)
         fragmentManager.popBackStack()
         fragmentTransition.commit()
-
     }
 }

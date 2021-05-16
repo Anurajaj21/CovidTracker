@@ -109,9 +109,8 @@ class IndiaFragment : Fragment() {
         GlobalScope.launch ( Dispatchers.Main ){
             LoadingUtils.showDialog(requireContext(), true)
             response.value = apiInterface?.StateResponse()
-            LoadingUtils.hideDialog()
-
             fetchData()
+            LoadingUtils.hideDialog()
         }
     }
 
@@ -133,11 +132,12 @@ class IndiaFragment : Fragment() {
     }
 
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "FragmentLiveDataObserve")
     private fun fetchData() {
 
-        response.observe(viewLifecycleOwner, { response->
+        response.observe(this, { response->
             if (response.code() == 200) {
+
                 Log.d("state data", response.body().toString())
                 list.addAll(response.body()?.statewise as ArrayList<Statewise>)
                 val ind = list[0]
@@ -162,13 +162,13 @@ class IndiaFragment : Fragment() {
                 in_delta_tests.text = "+" + ind_test.totalsamplestested
                 in_migrated.text = ind.migratedother
                 if(ind.statenotes == ""){
-                    india_note.text = "-----"
+                    india_note.text = "- - - - - - - - - - -"
                 }else{
                     india_note.text = ind.statenotes
                 }
-
                 india_piechart.clearChart()
                 setPiechart()
+
             }
 
         })

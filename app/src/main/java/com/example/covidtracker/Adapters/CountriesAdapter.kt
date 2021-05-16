@@ -1,5 +1,6 @@
    package com.example.covidtracker.Adapters
 
+import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.covidtracker.Fragments.CountryFragment
@@ -18,10 +20,11 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
-class CountriesAdapter(val list: ArrayList<countryDataItem>): RecyclerView.Adapter<CountriesAdapter.CountriesViewHolder>(), Filterable {
+@Suppress("UNCHECKED_CAST")
+class CountriesAdapter(var list: ArrayList<countryDataItem>): RecyclerView.Adapter<CountriesAdapter.CountriesViewHolder>(), Filterable {
 
     private val filterList  = list
-    private var usedList = list
+//    private var usedList : ArrayList<countryDataItem> = list
     class CountriesViewHolder(val view: View) : RecyclerView.ViewHolder(view)
 
 
@@ -32,10 +35,10 @@ class CountriesAdapter(val list: ArrayList<countryDataItem>): RecyclerView.Adapt
     }
 
     override fun onBindViewHolder(holder: CountriesViewHolder, position: Int) {
-        holder.view.name.text = usedList[position].country
-        holder.view.cases.text = usedList[position].cases.toString()
-        val url = usedList[position].countryInfo.flag
-        val unit = usedList[position]
+        holder.view.name.text = list[position].country
+        holder.view.cases.text = list[position].cases.toString()
+        val url = list[position].countryInfo.flag
+        val unit = list[position]
         GlobalScope.launch(Dispatchers.Main) {
             try {
                 Glide.with(holder.view.flag)
@@ -57,7 +60,7 @@ class CountriesAdapter(val list: ArrayList<countryDataItem>): RecyclerView.Adapt
         }
     }
 
-    override fun getItemCount() = usedList.size
+    override fun getItemCount() = list.size
 
     @ExperimentalStdlibApi
     override fun getFilter(): Filter {
@@ -65,6 +68,7 @@ class CountriesAdapter(val list: ArrayList<countryDataItem>): RecyclerView.Adapt
             override fun performFiltering(charSequence: CharSequence?): FilterResults {
                 val filterResult = FilterResults()
                 if(charSequence == null || charSequence.length < 0){
+                    Log.d("filterlist", filterResult.toString())
                     filterResult.count = filterList.size
                     filterResult.values = filterList
                 }else{
@@ -85,7 +89,10 @@ class CountriesAdapter(val list: ArrayList<countryDataItem>): RecyclerView.Adapt
             }
 
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                usedList = results?.values as ArrayList<countryDataItem>
+                Log.d("searchView", results.toString())
+                if(results?.values != null) {
+                    list = (results.values as? ArrayList<countryDataItem>)!!
+                }
                 notifyDataSetChanged()
             }
         }
