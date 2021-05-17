@@ -62,13 +62,17 @@ class HomeFragment : Fragment() {
         val retry = view.findViewById<Button>(R.id.ho_retry)
 
         InternetCheck{
-            if(!it){
+            if(it){
+                ho_no_internet.visibility = View.GONE
+                home.visibility = View.VISIBLE
+                fetchAllData(view)
+            }
+            else{
                 home.visibility = View.GONE
                 ho_no_internet.visibility = View.VISIBLE
             }
         }
 
-        fetchAllData(view)
 
         retry.setOnClickListener {
             InternetCheck{

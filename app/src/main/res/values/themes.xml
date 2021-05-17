@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.CovidTracker" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimary">@color/dark_gray</item>
         <item name="colorPrimaryVariant">#767C77</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->

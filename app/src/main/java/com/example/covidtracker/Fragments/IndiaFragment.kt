@@ -61,7 +61,18 @@ class IndiaFragment : Fragment() {
 
         searchState = view.findViewById(R.id.search_state)
 
-        fetchAllData()
+        InternetCheck{
+            if(it){
+                in_no_internet.visibility = View.GONE
+                india.visibility = View.VISIBLE
+                fetchAllData()
+            }
+            else{
+                india.visibility = View.GONE
+                in_no_internet.visibility = View.VISIBLE
+            }
+        }
+
 
         retry.setOnClickListener {
             InternetCheck{
@@ -91,7 +102,7 @@ class IndiaFragment : Fragment() {
 
 
 
-        adapter = StatesAdapter(list, tests)
+        adapter = StatesAdapter(list)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.setHasFixedSize(true)
@@ -139,12 +150,13 @@ class IndiaFragment : Fragment() {
             if (response.code() == 200) {
 
                 Log.d("state data", response.body().toString())
+                list.removeAll(response.body()?.statewise!!)
                 list.addAll(response.body()?.statewise as ArrayList<Statewise>)
                 val ind = list[0]
                 list.removeAt(0)
+                tests.removeAll(response.body()?.tested!!)
                 tests.addAll(response.body()?.tested as ArrayList<Tested>)
-                val ind_test = tests[0]
-                tests.removeAt(0)
+                val ind_test = tests[tests.lastIndex]
                 Log.d("state data", "fetch")
                 adapter.notifyDataSetChanged()
 
@@ -159,7 +171,7 @@ class IndiaFragment : Fragment() {
                 india_note.text = ind.statenotes
                 in_update.text = ind.lastupdatedtime
                 in_tests.text = ind_test.totalsamplestested
-                in_delta_tests.text = "+" + ind_test.totalsamplestested
+                in_delta_tests.text = "+" + ind_test.samplereportedtoday
                 in_migrated.text = ind.migratedother
                 if(ind.statenotes == ""){
                     india_note.text = "- - - - - - - - - - -"

@@ -27,6 +27,7 @@ import com.example.covidtracker.Network.ApiInterface
 import com.example.covidtracker.R
 import com.example.covidtracker.Utils.InternetCheck
 import com.example.covidtracker.Utils.LoadingUtils
+import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_world.*
 import kotlinx.coroutines.*
 import org.eazegraph.lib.models.PieModel
@@ -55,7 +56,17 @@ class WorldFragment : Fragment() {
 
         searchCountry = view.findViewById(R.id.search_country)
 
-        fetchAllData()
+        InternetCheck{
+            if(it){
+                wo_no_internet.visibility = View.GONE
+                world_frg.visibility = View.VISIBLE
+                fetchAllData()
+            }
+            else{
+                world_frg.visibility = View.GONE
+                wo_no_internet.visibility = View.VISIBLE
+            }
+        }
 
         retry.setOnClickListener {
             InternetCheck {
@@ -166,7 +177,10 @@ class WorldFragment : Fragment() {
 
         countryResponse.observe(this, {
             if (it.code() == 200) {
-                list.addAll(it.body() as ArrayList<countryDataItem>)
+
+                list.removeAll(it.body()!!)
+                list.addAll(it.body()!!)
+
                 Log.d("country data", "fetch")
                 adapter.notifyDataSetChanged()
             }

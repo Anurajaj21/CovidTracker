@@ -15,34 +15,41 @@ import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.example.covidtracker.Adapters.CountriesAdapter
 import com.example.covidtracker.Adapters.DistrictAdapter
 import com.example.covidtracker.Models.District.DistrictData
 import com.example.covidtracker.Models.District.DistrictResponse
 import com.example.covidtracker.Models.India.Statewise
-import com.example.covidtracker.Models.India.Tested
 import com.example.covidtracker.Network.ApiClient
 import com.example.covidtracker.Network.ApiInterface
 import com.example.covidtracker.R
 import com.example.covidtracker.Utils.InternetCheck
 import com.example.covidtracker.Utils.LoadingUtils
-import kotlinx.android.synthetic.main.fragment_country.*
-import kotlinx.android.synthetic.main.fragment_india.*
 import kotlinx.android.synthetic.main.fragment_state.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import org.eazegraph.lib.charts.PieChart
 import org.eazegraph.lib.models.PieModel
 import retrofit2.Response
 
 
-class StateFragment(private val unit1: Statewise, private  val unit2: Tested) : Fragment() {
+class StateFragment(private val unit1: Statewise) : Fragment() {
 
     lateinit var adapter : RecyclerView.Adapter<DistrictAdapter.DistrictViewHolder>
     var list = ArrayList<DistrictData>()
     val stateClient = ApiClient("https://api.covid19india.org/v2/")
     val response : MutableLiveData<Response<DistrictResponse>> = MutableLiveData()
     private lateinit var searchDistrict : SearchView
+
+    private lateinit var active : TextView
+    private lateinit var confirmed : TextView
+    private lateinit var recovered : TextView
+    private lateinit var deaths : TextView
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var back : ImageView
+    private lateinit var refresh : SwipeRefreshLayout
+    private lateinit var retry : Button
+    private lateinit var piechart : PieChart
 
     @ExperimentalStdlibApi
     @RequiresApi(Build.VERSION_CODES.N)
@@ -52,11 +59,8 @@ class StateFragment(private val unit1: Statewise, private  val unit2: Tested) : 
     ): View? {
         // Inflate the layout for this fragment
         val view =  inflater.inflate(R.layout.fragment_state, container, false)
-        val recyclerView = view.findViewById<RecyclerView>(R.id.district_rv)
 
-        val back = view.findViewById<ImageView>(R.id.st_back)
-        val refresh = view.findViewById<SwipeRefreshLayout>(R.id.state_refresh)
-        val retry = view.findViewById<Button>(R.id.st_retry)
+        setVar(view)
 
         back.setOnClickListener {
             activity?.onBackPressed()
@@ -102,6 +106,18 @@ class StateFragment(private val unit1: Statewise, private  val unit2: Tested) : 
         return view
     }
 
+    private fun setVar(view: View) {
+        recyclerView = view.findViewById(R.id.district_rv)
+        back = view.findViewById(R.id.st_back)
+        refresh = view.findViewById(R.id.state_refresh)
+        retry = view.findViewById(R.id.st_retry)
+        active = view.findViewById(R.id.st_active_cases)
+        confirmed = view.findViewById(R.id.st_confirmed_cases)
+        recovered = view.findViewById(R.id.st_recovered_cases)
+        deaths = view.findViewById(R.id.st_death_cases)
+        piechart = view.findViewById(R.id.state_piechart)
+    }
+
     @RequiresApi(Build.VERSION_CODES.N)
     @ExperimentalStdlibApi
     private fun fetchAllData(view: View){
@@ -112,7 +128,6 @@ class StateFragment(private val unit1: Statewise, private  val unit2: Tested) : 
             LoadingUtils.hideDialog()
             Log.d("district data", response.value?.body().toString())
             setData(view)
-            state_piechart.clearChart()
             setPiechart()
         }
     }
@@ -135,12 +150,15 @@ class StateFragment(private val unit1: Statewise, private  val unit2: Tested) : 
     }
 
     private fun setPiechart(){
-        state_piechart.addPieSlice(PieModel("Active", Integer.parseInt(st_active_cases.text.toString()).toFloat(), Color.parseColor("#85601F")))
-        state_piechart.addPieSlice(PieModel("Confirmed", Integer.parseInt(st_confirmed_cases.text.toString()).toFloat(), Color.parseColor("#6568EE")))
-        state_piechart.addPieSlice(PieModel("Recovered", Integer.parseInt(st_recovered_cases.text.toString()).toFloat(), Color.parseColor("#50A754")))
-        state_piechart.addPieSlice(PieModel("Deaths", Integer.parseInt(st_death_cases.text.toString()).toFloat(), Color.parseColor("#F30505")))
+        Log.d("stateActive", active.text.toString())
+        piechart.clearChart()
+        piechart.addPieSlice(PieModel("Active", Integer.parseInt(active.text.toString()).toFloat(), Color.parseColor("#85601F")))
+        piechart.addPieSlice(PieModel("Confirmed", Integer.parseInt(confirmed.text.toString()).toFloat(), Color.parseColor("#6568EE")))
+        piechart.addPieSlice(PieModel("Recovered", Integer.parseInt(recovered.text.toString()).toFloat(), Color.parseColor("#50A754")))
+        piechart.addPieSlice(PieModel("Deaths", Integer.parseInt(deaths.text.toString()).toFloat(), Color.parseColor("#F30505")))
 
-        state_piechart.startAnimation()
+
+        piechart.startAnimation()
 
     }
 
@@ -148,17 +166,11 @@ class StateFragment(private val unit1: Statewise, private  val unit2: Tested) : 
     @SuppressLint("SetTextI18n", "FragmentLiveDataObserve")
     private fun setData(view :  View){
         val name = view.findViewById<TextView>(R.id.st_name)
-        val active = view.findViewById<TextView>(R.id.st_active_cases)
-        val confirmed = view.findViewById<TextView>(R.id.st_confirmed_cases)
         val deltaConfirmed = view.findViewById<TextView>(R.id.st_delta_confirmed)
-        val recovered = view.findViewById<TextView>(R.id.st_recovered_cases)
         val deltaRecovered = view.findViewById<TextView>(R.id.st_delta_recovered)
-        val deaths = view.findViewById<TextView>(R.id.st_death_cases)
         val deltaDeaths = view.findViewById<TextView>(R.id.st_delta_deaths)
         val note = view.findViewById<TextView>(R.id.state_note)
         val update = view.findViewById<TextView>(R.id.st_update)
-        val tests = view.findViewById<TextView>(R.id.st_tests)
-        val deltaTests = view.findViewById<TextView>(R.id.st_delta_tests)
         val migrated = view.findViewById<TextView>(R.id.st_migrated)
 
         name.text = unit1.state
@@ -170,8 +182,6 @@ class StateFragment(private val unit1: Statewise, private  val unit2: Tested) : 
         deaths.text = unit1.deaths
         deltaDeaths.text = "+" + unit1.deltadeaths
         update.text = unit1.lastupdatedtime
-        tests.text = unit2.totalsamplestested
-        deltaTests.text = "+" + unit2.totalsamplestested
         migrated.text = unit1.migratedother
 
         if(unit1.statenotes == ""){
@@ -187,6 +197,7 @@ class StateFragment(private val unit1: Statewise, private  val unit2: Tested) : 
 //                    Log.d("district", i.toString())
                     if(unit1.state.lowercase() == i.state.lowercase()){
                         Log.d("district", i.state)
+                        list.removeAll(i.districtData)
                         list.addAll(i.districtData)
                         adapter.notifyDataSetChanged()
                     }
