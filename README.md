@@ -1,4 +1,4 @@
-<img src="https://github.com/Anurajaj21/CovidTracker/blob/02f5cb06a8550e6efb8c3b53fb1e29329635cd7c/app/src/main/res/drawable-v24/name_logo.png" width="400" height="75">
+# <img src="https://github.com/Anurajaj21/CovidTracker/blob/c901e057cefc846a713b5a48a930bdead41c5437/app/src/main/res/drawable-v24/bacteria.png" width="50" height="50"> CovidTracker
 <p align="center">
 <img src="https://github.com/Anurajaj21/CovidTracker/blob/02f5cb06a8550e6efb8c3b53fb1e29329635cd7c/app/src/main/res/drawable-v24/present.png" width="700">
 
